@@ -69,12 +69,12 @@ function Home() {
       </div>
 
       {/* Section 3 */}
-      <div className="py-10 px-5 lg:px-20 bg-gray-800">
+      <div className="py-10 px-5 lg:px-20 ">
         <div className="flex justify-between items-center mb-10 ">
-          <h1 className="font-bold text-4xl tracking-wide text-center text-white w-full sm:w-auto">
+          <h1 className="font-bold text-4xl tracking-wide text-center text-gray-800 w-full sm:w-auto">
             Top Sales🔥
           </h1>
-          <button className="font-medium tracking-wide text-base bg-white transform hover:scale-105 transition-all duration-300 text-black px-3 py-2 rounded-3xl">
+          <button className="font-normal tracking-wide text-base bg-black transform hover:scale-105 transition-all duration-300 text-white px-4 py-3 rounded-3xl">
             Shop More
           </button>
         </div>
