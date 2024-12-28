@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div className="font-lora w-full bg-gradient-to-br from-primary to-gray-100 rounded-t-3xl text-black">
+    <div className="font-lora w-full bg-gradient-to-br from-gray-100 to-gray-400 rounded-t-3xl text-black">
       {/* Section 1 */}
       <div className="flex flex-wrap justify-between items-center py-16 px-10 lg:px-20">
         <div className="w-full lg:w-1/2 space-y-6">
@@ -12,7 +12,7 @@ function Home() {
             style and needs. Experience the perfect blend of quality,
             creativity, and craftsmanship.
           </p>
-          <button className="bg-secondary text-white text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-500">
+          <button className="bg-black text-white text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-500">
             Get Started
           </button>
         </div>
