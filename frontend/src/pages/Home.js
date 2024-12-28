@@ -4,7 +4,7 @@ function Home() {
       {/* Section 1 */}
       <div className="flex flex-wrap justify-between items-center py-16 px-10 lg:px-20">
         <div className="w-full lg:w-1/2 space-y-6">
-          <h1 className="text-6xl font-extrabold tracking-widest text-secondary">
+          <h1 className="text-[55px] font-extrabold tracking-wider text-secondary">
             Welcome to <span className="text-black text-7xl">Style Craft</span>
           </h1>
           <p className="text-xl text-gray-700 w-5/6 ">
@@ -69,12 +69,119 @@ function Home() {
       </div>
 
       {/* Section 3 */}
-      <div>
-        <h1>Latest Styels</h1>
-        <div>
-            
+      <div className="py-10 px-5 lg:px-20 bg-gray-800">
+        <div className="flex justify-between items-center mb-10 ">
+          <h1 className="font-bold text-4xl tracking-wide text-center text-white w-full sm:w-auto">
+            Top Sales🔥
+          </h1>
+          <button className="font-medium tracking-wide text-base bg-white transform hover:scale-105 transition-all duration-300 text-black px-3 py-2 rounded-3xl">
+            Shop More
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+            <img
+              src="/assets/images/sample1.jpg"
+              alt="Sample Image"
+              className="w-full h-60 object-cover"
+            />
+            <div className="p-6">
+              <p className="text-center font-bold text-lg text-gray-800">
+                Customized Top for Women
+              </p>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-gray-700 font-medium">
+                  <span className="font-bold">Price:</span> Rs.2000.00
+                </span>
+                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+            <img
+              src="/assets/images/sample2.jpg"
+              alt="Sample Image"
+              className="w-full h-60 object-cover"
+            />
+            <div className="p-6">
+              <p className="text-center font-bold text-lg text-gray-800">
+                Customized Top for Women
+              </p>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-gray-700 font-medium">
+                  <span className="font-bold">Price:</span> Rs.2000.00
+                </span>
+                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+            <img
+              src="/assets/images/sample3.jpg"
+              alt="Sample Image"
+              className="w-full h-60 object-cover"
+            />
+            <div className="p-6">
+              <p className="text-center font-bold text-lg text-gray-800">
+                Customized Top for Women
+              </p>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-gray-700 font-medium">
+                  <span className="font-bold">Price:</span> Rs.2000.00
+                </span>
+                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+            <img
+              src="/assets/images/sample4.jpg"
+              alt="Sample Image"
+              className="w-full h-60 object-cover"
+            />
+            <div className="p-6">
+              <p className="text-center font-bold text-lg text-gray-800">
+                Customized Top for Women
+              </p>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-gray-700 font-medium">
+                  <span className="font-bold">Price:</span> Rs.2000.00
+                </span>
+                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Section 4 */}
+      {/* Section 4 */}
+      <div className="bg-white py-12 px-5 lg:px-20 text-center mx-auto">
+  <h1 className="font-semibold text-3xl">Subscribe To Our Newsletter</h1>
+  <p className="mt-3 text-lg">
+    Get the latest updates, news, and exclusive offers directly in your inbox.
+  </p>
+  <div className="flex justify-center items-center mt-6">
+    <form className="flex gap-3">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        required
+        className="border border-gray-300 pr-36 py-2 pl-6 rounded-xl"
+      />
+      <button
+        type="submit"
+        className="bg-black px-6 py-2 text-white tracking-wider rounded-xl  shadow-lg transform hover:shadow-xl hover:scale-105 transition-all duration-300"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+</div>
+
     </div>
   );
 }
