@@ -2,11 +2,11 @@ require("@fortawesome/fontawesome-free/css/all.min.css");
 
 function Footer() {
   return (
-    <footer className="bg-secondary text-white py-10 font-lora ">
+    <footer className="bg-black text-white py-10 font-lora">
   <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-44">
    
     <div className="space-y-4 w-72">
-      <h1 className="text-4xl font-bold  text-primary">Style Craft</h1>
+      <h1 className="text-4xl font-bold  text-highlight">Style Craft</h1>
       <p className="text-base leading-relaxed text-gray-400">
         At Style Craft, we specialize in creating custom clothing tailored to your unique style and needs. 
         Quality and craftsmanship are at the heart of what we do.
@@ -15,8 +15,8 @@ function Footer() {
 
   
     <div className="space-y-4">
-      <h2 className="text-xl font-bold scale-110  text-green-500">Location</h2>
-      <address className="text-lg not-italic text-gray-300">
+      <h2 className="text-xl font-bold scale-110  text-highlight">Location</h2>
+      <address className="text-lg not-italic text-gray-400">
         New Kandy Road,
         <br />
         Malabe,
@@ -28,8 +28,8 @@ function Footer() {
 
    
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-green-500">Quick Links</h2>
-      <ul className="text-lg text-gray-300 space-y-2">
+      <h2 className="text-xl font-bold text-highlight">Quick Links</h2>
+      <ul className="text-lg text-gray-400 space-y-2">
         <li className="transform hover:scale-110 transition-transform duration-300">
         <a href="#">Home</a>
         </li>
@@ -46,9 +46,9 @@ function Footer() {
     </div>
 
     <div className="space-y-4">
-      <h2 className="text-xl font-bold  text-green-500">Connect with Us</h2>
+      <h2 className="text-xl font-bold  text-highlight">Connect with Us</h2>
       <p className="text-lg text-gray-400">Follow us on social media for the latest updates and offers:</p>
-      <ul className="flex space-x-4 text-2xl">
+      <ul className="flex space-x-8 text-2xl">
         <li className="transform hover:scale-110 transition-transform duration-300">
           <a href="#" aria-label="Instagram" className="hover:text-pink-500 transition duration-300">
             <i className="fab fa-instagram"></i>

@@ -8,9 +8,10 @@ module.exports = {
         lora: ["Lora", "serif"],
       },
       colors: {
-        primary: '#EEEEEE', 
-        secondary: '#124076', 
-        highlight: '#124076', 
+        primary: "#EEEEEE",
+        secondary: "#124076",
+        highlight: "#F5F5F5",
+        lightblue: "#A6D1E6",
       },
     },
   },
