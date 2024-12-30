@@ -26,8 +26,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     googleId:{
-        type:String,
-        unique:true
+        type: String, unique: true, sparse: true
     },
     createdAt:{
         type:Date,

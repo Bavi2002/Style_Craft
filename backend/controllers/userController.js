@@ -1,15 +1,12 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 const sendOtp = require("../utils/sendOtp");
-const uploadToAzure = require("../utils/azureBlob")
+const uploadToAzure = require("../utils/azureBlob");
 
 const register = async (req, res) => {
   try {
     const { name, email, address, phone, password } = req.body;
     const profile = req.file;
-
-
-    console.log("Multer File:", profile); // Log req.file
 
     const user = await User.findOne({ email });
     if (user) {
@@ -17,10 +14,9 @@ const register = async (req, res) => {
     }
 
     //For API Testing
-    if (!name || !email || !address || !phone || !password ) {
+    if (!name || !email || !address || !phone || !password) {
       throw new Error("All fields are required");
     }
-   
 
     const hashPass = await bcryptjs.hash(password, 10);
 
@@ -34,7 +30,7 @@ const register = async (req, res) => {
       address,
       phone,
       profile: {
-        buffer: profile.buffer,
+        buffer: profile.buffer.toString("base64"),
         filename: profile.originalname,
       },
       password: hashPass,
@@ -53,68 +49,57 @@ const register = async (req, res) => {
 };
 
 const verify = async (req, res) => {
-
   try {
     const { email, otp } = req.body;
     const tempUser = req.session.tempUser;
-
-    console.log(tempUser)
 
     if (!tempUser || tempUser.email !== email) return res.status(400).json({ message: "Invalid Email or Session Expired" });
     if (tempUser.otp !== otp) return res.status(400).json({ message: "Invalid OTP" });
     if (tempUser.otpExpiry < Date.now()) return res.status(400).json({ message: "OTP Has Expired" });
   
+    // Decode the buffer
+    if (tempUser.profile && tempUser.profile.buffer) {
+      tempUser.profile.buffer = Buffer.from(tempUser.profile.buffer, "base64");
+    }
 
-
-
-
-
-
+    //Test
     if (!tempUser.profile || !tempUser.profile.buffer) {
-        return res.status(400).json({ message: "Profile photo is required" });
-      }
-  
-      if (!Buffer.isBuffer(tempUser.profile.buffer) || tempUser.profile.buffer.length === 0) {
-        return res.status(400).json({ message: "Invalid Profile Photo" });
-      }
-  
-      console.log("Profile Buffer Type:", typeof tempUser.profile.buffer);
-console.log("Profile Buffer Length:", tempUser.profile.buffer.length);
+      return res.status(400).json({ message: "Profile photo is required" });
+    };
 
-      // Upload Profile Photo to Azure Blob
-      const profilePhotoUrl = await uploadToAzure(
-        tempUser.profile.buffer,  // The file buffer
-        tempUser.profile.filename  // The filename
-      );
+    if (
+      !Buffer.isBuffer(tempUser.profile.buffer) ||
+      tempUser.profile.buffer.length === 0
+    ) {
+      return res.status(400).json({ message: "Invalid Profile Photo" });
+    };
 
 
-
-
-    //Upload Profile Photo to Azure Blob
-    // const profilePhotoUrl = await uploadToAzure(
-    //   tempUser.profile.buffer,
-    //   tempUser.profile.filename
-    // );
+    // Upload Profile Photo to Azure Blob
+    const profilePhotoUrl = await uploadToAzure(
+      tempUser.profile.buffer, 
+      tempUser.profile.filename 
+    );
 
     const newUser = new User({
-        name:tempUser.name,
-        email:tempUser.email,
-        address:tempUser.address,
-        phone:tempUser.phone,
-        password:tempUser.password,
-        profilePhoto:profilePhotoUrl
+      name: tempUser.name,
+      email: tempUser.email,
+      address: tempUser.address,
+      phone: tempUser.phone,
+      password: tempUser.password,
+      profilePhoto: profilePhotoUrl,
     });
 
     await newUser.save();
 
     //Clear Temporary Session
-    // req.session.tempUser = null;
+    req.session.tempUser = null;
 
-    res.status(200).json({ message:"User Verified & Registered Successfully"})
-
-
-} catch (error) {
-    console.log("message",error.message)
+    res
+      .status(200)
+      .json({ message: "User Verified & Registered Successfully" });
+  } catch (error) {
+    console.log("message", error.message);
     res
       .status(500)
       .json({ message: "Failed To Verify OTP and Save User Data" });
