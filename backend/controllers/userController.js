@@ -106,4 +106,34 @@ const verify = async (req, res) => {
   }
 };
 
-module.exports = { register, verify };
+const login = async (req,res) => {
+    try {
+        
+        const {email,password} = req.body;
+
+        if(!email || !password) return res.status(400).json({message:"Email and Password are Required"})
+
+        const user = await User.findOne({email});
+        if(!user) return res.status(400).json({message:"Invalid Email or Password"});
+
+        const isMatch = await bcryptjs.compare(password, user.password);
+        if(!isMatch) return res.status(400).json({message:"Password Not Match"});
+
+        req.session.user = {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            address: user.address,
+            phone: user.phone,
+            profilePhoto: user.profilePhoto,
+        };
+
+        res.status(200).json({message:"Login Successful", user: req.session.user});
+
+
+    } catch (error) {
+        res.status(500).json({ message: "Failed to Login"});
+    }
+};
+
+module.exports = { register, verify, login };
