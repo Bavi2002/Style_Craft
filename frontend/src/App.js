@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
+import VerifyOtp from "./pages/verifyOtp";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/verify" element={<VerifyOtp />} />
         </Routes>
         <Footer />
       </div>

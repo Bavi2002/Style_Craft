@@ -1,6 +1,6 @@
 require("@fortawesome/fontawesome-free/css/all.min.css");
 
-function Footer() {
+const Footer = () => {
   return (
     <footer className="bg-gray-950 text-white py-10 font-lora">
   <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-44">

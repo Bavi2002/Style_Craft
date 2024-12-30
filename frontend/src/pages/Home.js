@@ -1,4 +1,4 @@
-function Home() {
+const Home = () => {
   return (
     <div className="font-lora w-full bg-gradient-to-br from-gray-100 to-gray-400 rounded-t-3xl text-black">
       {/* Section 1 */}

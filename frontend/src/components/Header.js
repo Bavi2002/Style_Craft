@@ -1,4 +1,4 @@
-function Header() {
+const Header = () => {
   return (
     <header className="flex items-center justify-between font-lora m-4">
       <div className="text-5xl ml-3 p-4 font-bold tracking-wider">Style Craft</div>

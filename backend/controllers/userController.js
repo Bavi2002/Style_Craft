@@ -24,7 +24,7 @@ const register = async (req, res) => {
     const otpExpiry = Date.now() + 10 * 60 * 1000;
 
     //Temporarily Store User Data
-    req.session.tempUser = {
+    req.session.tempUserData = {
       name,
       email,
       address,
@@ -51,12 +51,20 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, otp } = req.body;
-    const tempUser = req.session.tempUser;
+    const tempUser = req.session.tempUserData;
 
-    if (!tempUser || tempUser.email !== email) return res.status(400).json({ message: "Invalid Email or Session Expired" });
-    if (tempUser.otp !== otp) return res.status(400).json({ message: "Invalid OTP" });
-    if (tempUser.otpExpiry < Date.now()) return res.status(400).json({ message: "OTP Has Expired" });
-  
+    console.log("Setting session tempUser:", req.session.tempUser);
+
+
+    if (!tempUser || tempUser.email !== email)
+      return res
+        .status(400)
+        .json({ message: "Invalid Email or Session Expired" });
+    if (tempUser.otp !== otp)
+      return res.status(400).json({ message: "Invalid OTP" });
+    if (tempUser.otpExpiry < Date.now())
+      return res.status(400).json({ message: "OTP Has Expired" });
+
     // Decode the buffer
     if (tempUser.profile && tempUser.profile.buffer) {
       tempUser.profile.buffer = Buffer.from(tempUser.profile.buffer, "base64");
@@ -65,20 +73,19 @@ const verify = async (req, res) => {
     //Test
     if (!tempUser.profile || !tempUser.profile.buffer) {
       return res.status(400).json({ message: "Profile photo is required" });
-    };
+    }
 
     if (
       !Buffer.isBuffer(tempUser.profile.buffer) ||
       tempUser.profile.buffer.length === 0
     ) {
       return res.status(400).json({ message: "Invalid Profile Photo" });
-    };
-
+    }
 
     // Upload Profile Photo to Azure Blob
     const profilePhotoUrl = await uploadToAzure(
-      tempUser.profile.buffer, 
-      tempUser.profile.filename 
+      tempUser.profile.buffer,
+      tempUser.profile.filename
     );
 
     const newUser = new User({
@@ -106,34 +113,64 @@ const verify = async (req, res) => {
   }
 };
 
-const login = async (req,res) => {
-    try {
-        
-        const {email,password} = req.body;
+const resendOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-        if(!email || !password) return res.status(400).json({message:"Email and Password are Required"})
-
-        const user = await User.findOne({email});
-        if(!user) return res.status(400).json({message:"Invalid Email or Password"});
-
-        const isMatch = await bcryptjs.compare(password, user.password);
-        if(!isMatch) return res.status(400).json({message:"Password Not Match"});
-
-        req.session.user = {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            address: user.address,
-            phone: user.phone,
-            profilePhoto: user.profilePhoto,
-        };
-
-        res.status(200).json({message:"Login Successful", user: req.session.user});
-
-
-    } catch (error) {
-        res.status(500).json({ message: "Failed to Login"});
+    const tempUser = req.session.tempUser;
+    if (!tempUser || tempUser.email !== email) {
+      return res
+        .status(400)
+        .json({ message: "Session Expired or Invalid Email" });
     }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = Date.now() + 10 * 60 * 1000;
+
+    req.session.tempUser.otp = otp;
+    req.session.tempUser.otpExpiry = otpExpiry;
+
+    await sendOtp(email, otp);
+
+    res.status(200).json({ message: "OTP Has Been Resend to Your Email" });
+  
+} catch (error) {
+    res.status(500).json({ message: "Failed to Resend OTP" });
+  }
 };
 
-module.exports = { register, verify, login };
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ message: "Email and Password are Required" });
+
+    const user = await User.findOne({ email });
+    if (!user)
+      return res.status(400).json({ message: "Invalid Email or Password" });
+
+    const isMatch = await bcryptjs.compare(password, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: "Password Not Match" });
+
+    req.session.user = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      address: user.address,
+      phone: user.phone,
+      profilePhoto: user.profilePhoto,
+    };
+
+    res
+      .status(200)
+      .json({ message: "Login Successful", user: req.session.user });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to Login" });
+  }
+};
+
+module.exports = { register, verify, login, resendOtp };

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Register() {
+const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,7 +24,12 @@ function Register() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData({ ...formData, profile: file });
+
+    if (file && !["image/png", "image/jpeg"].includes(file.type)) {
+      setErrors({ ...errors, profile: "File Must be PNG or JPEG Image" });
+    } else {
+      setFormData({ ...formData, profile: file });
+    }
   };
 
   const handleKeyPress = (e) => {
@@ -92,7 +97,7 @@ function Register() {
       );
 
       if (response.status === 200) {
-        console.log(response.data.message)
+        console.log(response.data.message);
         navigate("/verify", { state: { email: formData.email } });
       } else {
         if (response.data.message === "User Already Exists") {
@@ -122,7 +127,6 @@ function Register() {
           onChange={handleChange}
           required
         />
-        {}
 
         <input
           type="email"
@@ -131,6 +135,7 @@ function Register() {
           value={formData.email}
           onChange={handleChange}
         />
+        {errors.email && <p className="error-message">{errors.email}</p>}
 
         <input
           type="text"
@@ -149,6 +154,7 @@ function Register() {
           value={formData.phone}
           onChange={handleChange}
         />
+        {errors.phone && <p className="error-message">{errors.phone}</p>}
 
         <input
           type="password"
@@ -157,6 +163,7 @@ function Register() {
           value={formData.password}
           onChange={handleChange}
         />
+        {errors.password && <p className="error-message">{errors.password}</p>}
 
         <input
           type="password"
@@ -165,13 +172,17 @@ function Register() {
           value={formData.confirmPassword}
           onChange={handleChange}
         />
+        {errors.confirmPassword && (
+          <p className="error-message">{errors.confirmPassword}</p>
+        )}
 
         <input type="file" name="profile" onChange={handleFileChange} />
+        {errors.profile && <p className="error-message">{errors.profile}</p>}
 
         <button type="submit">Register</button>
       </form>
     </div>
   );
-}
+};
 
 export default Register;
