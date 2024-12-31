@@ -100,18 +100,14 @@ const Register = () => {
       if (response.status === 200) {
         console.log(response.data.message);
         navigate("/verify", { state: { email: formData.email } });
-      } else {
-        if (response.data.message === "User Already Exists") {
-          alert("This Email Already Registered. Please Use a Different Email");
-        } else {
-          alert(
-            response.data.message || "An error occurred during registration."
-          );
-        }
       }
     } catch (error) {
       console.error("API Error:", error.response?.data || error.message);
-      setErrors(error.response?.data || { message: error.message });
+      if (error.response && error.response.status === 400) {
+        alert("This Email Already Registered. Please Use a Different Email");
+      } else {
+        setErrors(error.response?.data || { message: error.message });
+      }
     }
   };
 

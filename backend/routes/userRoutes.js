@@ -9,6 +9,6 @@ router.post("/verify", verify);
 router.post("/resend-otp", resendOtp);
 router.post("/register", upload.single("profile"), register);
 router.post("/google-signin", googleSignIn);
-router.get("/login", login);
+router.post("/login", login);
 
 module.exports = router;
