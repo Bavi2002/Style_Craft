@@ -7,39 +7,44 @@ const VerifyOtp = () => {
   const [errors, setError] = useState("");
 
   const [resendTimer, setResendTimer] = useState(10);
-  const [isResending, setIsResending] = useState(false);
+  const [isResending, setIsResending] = useState(true);
 
   const location = useLocation();
   const navigate = useNavigate();
   const email = location.state?.email;
 
-
   //Countdown Timer for OTP Resend
   useEffect(() => {
-    if (isResending && resendTimer > 0) {
+    if (resendTimer > 0) {
       const timerId = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
       return () => clearTimeout(timerId);
+    } else {
+      setIsResending(false);
     }
-  }, [isResending, resendTimer]);
+  }, [resendTimer]);
 
   //OTP Resend
   const handleResendOtp = async () => {
     setError("");
     setIsResending(true);
+    setResendTimer(30);
 
-    setTimeout(async () => {
-      try {
-        const response = await axios.post(
-          "http://localhost:5000/api/users/resend-otp",
-          { email }
-        );
-        if (response.status === 200) {
-          console.log(response.data.message);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/resend-otp",
+        { email },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
         }
-      } catch (error) {
-        setError(error.response?.data?.message || "Failed to resend OTP");
+      );
+      if (response.status === 200) {
+        console.log(response.data.message);
       }
-    }, 10000);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to resend OTP");
+      setIsResending(false);
+    }
   };
 
   const handleOtpChange = (e) => {
@@ -53,11 +58,14 @@ const VerifyOtp = () => {
     setError("");
     e.preventDefault();
 
-
     try {
       const response = await axios.post(
         "http://localhost:5000/api/users/verify",
-        { email, otp },{  withCredentials: true ,headers: { "Content-Type": "application/json" } }
+        { email, otp },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
       );
 
       if (response.status === 200) {

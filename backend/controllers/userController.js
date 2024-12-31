@@ -23,7 +23,6 @@ const register = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = Date.now() + 10 * 60 * 1000;
 
-
     //For TESTING Purpose(delete Later)
     console.log("OTP Is: ", otp);
 
@@ -68,7 +67,10 @@ const verify = async (req, res) => {
 
     // Decode the buffer
     if (tempUserData.profile && tempUserData.profile.buffer) {
-      tempUserData.profile.buffer = Buffer.from(tempUserData.profile.buffer, "base64");
+      tempUserData.profile.buffer = Buffer.from(
+        tempUserData.profile.buffer,
+        "base64"
+      );
     }
 
     //Test
@@ -127,6 +129,11 @@ const resendOtp = async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = Date.now() + 10 * 60 * 1000;
+
+    
+    //For TESTING Purpose(delete Later)
+    console.log("OTP Is: ", otp);
+
 
     req.session.tempUserData.otp = otp;
     req.session.tempUserData.otpExpiry = otpExpiry;
