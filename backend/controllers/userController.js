@@ -23,6 +23,10 @@ const register = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = Date.now() + 10 * 60 * 1000;
 
+
+    //For TESTING Purpose(delete Later)
+    console.log("OTP Is: ", otp);
+
     //Temporarily Store User Data
     req.session.tempUserData = {
       name,
@@ -51,56 +55,53 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, otp } = req.body;
-    const tempUser = req.session.tempUserData;
 
-    console.log("Setting session tempUser:", req.session.tempUser);
-
-
-    if (!tempUser || tempUser.email !== email)
+    const tempUserData = req.session.tempUserData;
+    if (!tempUserData || tempUserData.email !== email)
       return res
         .status(400)
         .json({ message: "Invalid Email or Session Expired" });
-    if (tempUser.otp !== otp)
+    if (tempUserData.otp !== otp)
       return res.status(400).json({ message: "Invalid OTP" });
-    if (tempUser.otpExpiry < Date.now())
+    if (tempUserData.otpExpiry < Date.now())
       return res.status(400).json({ message: "OTP Has Expired" });
 
     // Decode the buffer
-    if (tempUser.profile && tempUser.profile.buffer) {
-      tempUser.profile.buffer = Buffer.from(tempUser.profile.buffer, "base64");
+    if (tempUserData.profile && tempUserData.profile.buffer) {
+      tempUserData.profile.buffer = Buffer.from(tempUserData.profile.buffer, "base64");
     }
 
     //Test
-    if (!tempUser.profile || !tempUser.profile.buffer) {
+    if (!tempUserData.profile || !tempUserData.profile.buffer) {
       return res.status(400).json({ message: "Profile photo is required" });
     }
 
     if (
-      !Buffer.isBuffer(tempUser.profile.buffer) ||
-      tempUser.profile.buffer.length === 0
+      !Buffer.isBuffer(tempUserData.profile.buffer) ||
+      tempUserData.profile.buffer.length === 0
     ) {
       return res.status(400).json({ message: "Invalid Profile Photo" });
     }
 
     // Upload Profile Photo to Azure Blob
     const profilePhotoUrl = await uploadToAzure(
-      tempUser.profile.buffer,
-      tempUser.profile.filename
+      tempUserData.profile.buffer,
+      tempUserData.profile.filename
     );
 
     const newUser = new User({
-      name: tempUser.name,
-      email: tempUser.email,
-      address: tempUser.address,
-      phone: tempUser.phone,
-      password: tempUser.password,
+      name: tempUserData.name,
+      email: tempUserData.email,
+      address: tempUserData.address,
+      phone: tempUserData.phone,
+      password: tempUserData.password,
       profilePhoto: profilePhotoUrl,
     });
 
     await newUser.save();
 
     //Clear Temporary Session
-    req.session.tempUser = null;
+    req.session.tempUserData = null;
 
     res
       .status(200)
@@ -117,7 +118,7 @@ const resendOtp = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const tempUser = req.session.tempUser;
+    const tempUser = req.session.tempUserData;
     if (!tempUser || tempUser.email !== email) {
       return res
         .status(400)
@@ -127,14 +128,13 @@ const resendOtp = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = Date.now() + 10 * 60 * 1000;
 
-    req.session.tempUser.otp = otp;
-    req.session.tempUser.otpExpiry = otpExpiry;
+    req.session.tempUserData.otp = otp;
+    req.session.tempUserData.otpExpiry = otpExpiry;
 
     await sendOtp(email, otp);
 
     res.status(200).json({ message: "OTP Has Been Resend to Your Email" });
-  
-} catch (error) {
+  } catch (error) {
     res.status(500).json({ message: "Failed to Resend OTP" });
   }
 };

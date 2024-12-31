@@ -7,38 +7,36 @@ const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-dotenv.config();
+app.use(express.json());
 
-connectDB();
+dotenv.config();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    credentials: true,
+    origin: "http://localhost:3000", 
+    credentials: true, 
   })
 );
 
-app.use(express.json());
 
 // Configure express-session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
+    secret: process.env.SESSION_SECRET, 
+    resave: false, 
     saveUninitialized: false,
     cookie: {
-      secure: false,
-      httpOnly: true,
-      maxAge: 10 * 60 * 1000,
+      secure: false, 
+      httpOnly: true, 
+      maxAge: 10 * 60 * 1000, 
     },
   })
 );
-app.use((req, res, next) => {
-  console.log("Session:", req.session);
-  next();
-});
+
 
 app.use("/api/users", userRoutes);
+
+connectDB();
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

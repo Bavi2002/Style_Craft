@@ -57,7 +57,7 @@ const VerifyOtp = () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/users/verify",
-        { email, otp },{ credentials: "include", headers: { "Content-Type": "application/json" } }
+        { email, otp },{  withCredentials: true ,headers: { "Content-Type": "application/json" } }
       );
 
       if (response.status === 200) {
