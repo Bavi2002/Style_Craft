@@ -117,9 +117,9 @@ const Register = () => {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/assets/images/Signin_background.png')" }}
+      style={{ backgroundImage: "url('/assets/images/bg3.jpg')" }}
     >
-      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center p-16">
+      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center p-16 pt-40">
         <div className="relative w-full h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl shadow-lg p-6 flex flex-col gap-6">
           {preview && (
             <div className="absolute top-4 right-4">

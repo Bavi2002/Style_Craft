@@ -1,32 +1,29 @@
 const Home = () => {
   return (
-    <div className="font-lora w-full bg-gradient-to-br from-gray-100 to-gray-400 rounded-t-3xl text-black">
+    <div className="font-lora " >
       {/* Section 1 */}
-      <div className="flex flex-wrap justify-between items-center py-16 px-10 lg:px-20">
-        <div className="w-full lg:w-1/2 space-y-6">
-          <h1 className="text-[55px] font-extrabold tracking-wider text-secondary">
-            Welcome to <span className="text-black text-7xl">Style Craft</span>
-          </h1>
-          <p className="text-xl text-gray-700 w-5/6 ">
-            We specialize in creating bespoke clothing tailored to your unique
-            style and needs. Experience the perfect blend of quality,
-            creativity, and craftsmanship.
-          </p>
-          <button className="bg-black text-white text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-500">
-            Get Started
-          </button>
-        </div>
+      <div
+  className="relative flex items-center justify-center h-screen  bg-cover
+   bg-center"  style={{
+      backgroundImage: "url('/assets/images/bg.jpg')",
+    }}
+>
+   {/* Overlay */}
+  <div className="relative z-10 text-center justify-center space-y-6 text-white px-4 lg:px-0">
+    <h1 className="text-[70px] font-extrabold tracking-wider text-sky-800 font-lora">
+      Welcome to <span className=" text-black text-[85px]">Style Craft</span>
+    </h1>
+    <p className="text-2xl w-full lg:w-5/12 mx-auto text-white font-lora font-medium">
+      We specialize in creating bespoke clothing tailored to your unique style
+      and needs. Experience the perfect blend of quality, creativity, and
+      craftsmanship.
+    </p>
+    <button className="bg-secondary text-white text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-500">
+      Get Started
+    </button>
+  </div>
+</div>
 
-        <div className="relative w-full lg:w-1/2 mt-10 lg:mt-0 flex justify-center">
-          <div className="absolute w-[550px] h-[550px] bg-black rounded-full right-1  opacity-90"></div>
-
-          <img
-            src="/assets/images/landing_page_clothe.png"
-            alt="Clothing Store"
-            className="w-[600px] h-[600px] object-contain transform hover:scale-105 transition-transform duration-500 z-10 mr-32"
-          />
-        </div>
-      </div>
 
       {/* Section 2 */}
       <div className="bg-white py-16 px-10 lg:px-20 text-center">
@@ -69,12 +66,13 @@ const Home = () => {
       </div>
 
       {/* Section 3 */}
-      <div className="py-10 px-5 lg:px-20 ">
+      <div className="py-10 px-5 lg:px-20 bg-gradient-to-b from-black via-sky-600  to-sky-800">
+
         <div className="flex justify-between items-center mb-10 ">
-          <h1 className="font-bold text-4xl tracking-wide text-center text-gray-800 w-full sm:w-auto">
+          <h1 className="font-bold text-4xl tracking-wide text-center text-white w-full sm:w-auto">
             Top Sales🔥
           </h1>
-          <button className="font-normal tracking-wide text-base bg-black transform hover:scale-105 transition-all duration-300 text-white px-4 py-3 rounded-3xl">
+          <button className="font-medium tracking-wide text-base bg-blue-600 transform hover:scale-105 transition-all duration-300 text-white  px-4 py-3 rounded-3xl border border-gray-400">
             Shop More
           </button>
         </div>
@@ -82,7 +80,7 @@ const Home = () => {
           <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
             <img
               src="/assets/images/sample1.jpg"
-              alt="Sample Image"
+              alt="Sample"
               className="w-full h-60 object-cover"
             />
             <div className="p-6">
@@ -101,7 +99,7 @@ const Home = () => {
           <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
             <img
               src="/assets/images/sample2.jpg"
-              alt="Sample Image"
+              alt="Sample"
               className="w-full h-60 object-cover"
             />
             <div className="p-6">
@@ -120,7 +118,7 @@ const Home = () => {
           <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
             <img
               src="/assets/images/sample3.jpg"
-              alt="Sample Image"
+              alt="Sample"
               className="w-full h-60 object-cover"
             />
             <div className="p-6">
@@ -139,7 +137,7 @@ const Home = () => {
           <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
             <img
               src="/assets/images/sample4.jpg"
-              alt="Sample Image"
+              alt="Sample"
               className="w-full h-60 object-cover"
             />
             <div className="p-6">
