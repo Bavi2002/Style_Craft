@@ -1,7 +1,17 @@
-const Header = () => {
+import { useState, useEffect } from "react";
+
+const Header = ({ user, setUser }) => {
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    window.location.reload();
+  };
+
   return (
     <header className="flex items-center justify-between font-lora m-4">
-      <div className="text-5xl ml-3 p-4 font-bold tracking-wider">Style Craft</div>
+      <div className="text-5xl ml-3 p-4 font-bold tracking-wider">
+        Style Craft
+      </div>
       <nav>
         <ul className="flex space-x-10 mr-4 items-center text-xl font-medium tracking-widest">
           <li className=" px-2 py-1  transform hover:scale-110 transition-transform duration-300">
@@ -18,11 +28,26 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-
-      <button className="bg-secondary px-7 py-3 mr-9 text-white bord rounded-3xl tracking-wider transform hover:scale-105 transition-transform duration-300 ">
-        Sign In
-      </button>
+      {user ? (
+        <div className="flex items-center space-x-4 mr-9">
+          <img
+            src={user.profilePhoto}
+            alt="Profile"
+            className="w-10 h-10 rounded-full border"
+          />
+          <button
+            onClick={handleLogout}
+            className="ml-4 bg-red-500 px-3 py-1 text-white rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <button className="bg-secondary px-7 py-3 mr-9 text-white bord rounded-3xl tracking-wider transform hover:scale-105 transition-transform duration-300 ">
+          Sign In
+        </button>
+      )}
     </header>
   );
-}
+};
 export default Header;
