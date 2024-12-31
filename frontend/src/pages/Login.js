@@ -58,7 +58,7 @@ const Login = ({ setUser }) => {
           value={password}
           required
         />
-        {errors && <p>{errors}</p>};<button type="submit">LogIn</button>
+        {errors && <p>{errors}</p>}<button type="submit">LogIn</button>
       </form>
     </div>
   );

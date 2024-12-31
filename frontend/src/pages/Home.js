@@ -158,32 +158,31 @@ const Home = () => {
       </div>
 
       {/* Section 4 */}
-      {/* Section 4 */}
       <div className="bg-white py-12 px-5 lg:px-20 text-center mx-auto">
-  <h1 className="font-semibold text-3xl">Subscribe To Our Newsletter</h1>
-  <p className="mt-3 text-lg">
-    Get the latest updates, news, and exclusive offers directly in your inbox.
-  </p>
-  <div className="flex justify-center items-center mt-6">
-    <form className="flex gap-3">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        required
-        className="border border-gray-300 pr-36 py-2 pl-6 rounded-xl"
-      />
-      <button
-        type="submit"
-        className="bg-black px-6 py-2 text-white tracking-wider rounded-xl  shadow-lg transform hover:shadow-xl hover:scale-105 transition-all duration-300"
-      >
-        Subscribe
-      </button>
-    </form>
-  </div>
-</div>
-
+        <h1 className="font-semibold text-3xl">Subscribe To Our Newsletter</h1>
+        <p className="mt-3 text-lg">
+          Get the latest updates, news, and exclusive offers directly in your
+          inbox.
+        </p>
+        <div className="flex justify-center items-center mt-6">
+          <form className="flex gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              required
+              className="border border-gray-300 pr-36 py-2 pl-6 rounded-xl"
+            />
+            <button
+              type="submit"
+              className="bg-black px-6 py-2 text-white tracking-wider rounded-xl  shadow-lg transform hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default Home;

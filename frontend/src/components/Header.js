@@ -33,11 +33,11 @@ const Header = ({ user, setUser }) => {
           <img
             src={user.profilePhoto}
             alt="Profile"
-            className="w-10 h-10 rounded-full border"
+            className="w-16 h-16 rounded-full border border-blue-900 border-1"
           />
           <button
             onClick={handleLogout}
-            className="ml-4 bg-red-500 px-3 py-1 text-white rounded-lg"
+            className="ml-4 bg-red-500 px-5 py-1 text-white rounded-lg tracking-wider text-base transform hover:scale-105 transition-transform duration-300 "
           >
             Logout
           </button>
