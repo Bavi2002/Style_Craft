@@ -4,7 +4,7 @@ import axios from "axios";
 
 import GoogleSignIn from "../components/GoogleSignIn";
 
-const Register = () => {
+const Register = ({ setUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,7 +35,6 @@ const Register = () => {
       setPreiview(URL.createObjectURL(file));
     }
   };
-  const handleGoogleSignIn = () => {};
 
   const handleKeyPress = (e) => {
     // Allow only letters and spaces in the name field
@@ -185,6 +184,7 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  required
                   value={formData.password}
                   onChange={handleChange}
                   className="placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-white"
@@ -197,6 +197,7 @@ const Register = () => {
                   type="password"
                   name="confirmPassword"
                   placeholder="Confirm Password"
+                  required
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="placeholder:tracking-wide placeholder:text-base placeholder:text-white p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5"
@@ -215,6 +216,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
+                required
                 value={formData.email}
                 onChange={handleChange}
                 className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -241,9 +243,8 @@ const Register = () => {
                 >
                   Register
                 </button>
-                <GoogleSignIn />
+                <GoogleSignIn setUser={setUser} />
               </div>
-
               <p className="text-center mt-4 text-black text-lg tracking-wide font-semibold">
                 Already have an account?{" "}
                 <a

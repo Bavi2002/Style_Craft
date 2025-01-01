@@ -26,7 +26,7 @@ function App() {
       <div>
         <Header user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<Register setUser={setUser} />} />
           <Route path="/home" element={<Home />} />
           <Route path="/verify" element={<VerifyOtp />} />
           <Route path="/login" element={<Login setUser={setUser} />} />

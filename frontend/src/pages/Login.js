@@ -19,8 +19,6 @@ const Login = ({ setUser }) => {
     setPassword(e.target.value);
   };
 
-  const handleGoogleSignIn = () => {};
-
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors("");
@@ -52,7 +50,6 @@ const Login = ({ setUser }) => {
     >
       <div className="flex items-center justify-center min-h-screen pt-24">
         <div className="bg-gray-500 bg-opacity-20 backdrop-blur-lg p-8  rounded-3xl shadow-xl w-96 border-gray-300 border-2">
-          {/* Welcome Back Heading */}
           <h1 className="text-center text-4xl font-bold text-blue-800 mb-6 mt-4">
             Welcome Back To{" "}
             <span className="text-black text-5xl tracking-wider font-lora ">
@@ -102,10 +99,9 @@ const Login = ({ setUser }) => {
 
           {/* Google Sign-In Button */}
           <div className="mt-4">
-          <GoogleSignIn />
+            <GoogleSignIn setUser={setUser} />
           </div>
 
-          {/* Register Link */}
           <div className="mt-4 text-center">
             <p className="text-lg font-bold text-black tracking-wide">
               Do not have an account?{" "}

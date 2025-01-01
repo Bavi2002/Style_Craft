@@ -5,13 +5,11 @@ const Home = () => {
     <div className="font-lora ">
       {/* Section 1 */}
       <div
-        className="relative flex items-center justify-center h-screen bg-cover
-   bg-center"
+        className="relative flex items-center justify-center h-screen bg-cover bg-center"
         style={{
           backgroundImage: "url('/assets/images/bg5.jpg')",
         }}
       >
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-55"></div>
         <div className="relative z-10 text-center justify-center space-y-6 text-blue-800 px-4 lg:px-2 pb-20 mt-12 bg-white bg-opacity-5 p-9 rounded-lg backdrop-blur-lg shadow-lg w-10/12 lg:w-7/12 border-gray-400 border-2">
           <h1 className="text-[70px] font-extrabold tracking-wider text-blue-300  font-lora">
