@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import GoogleSignIn from "../components/GoogleSignIn";
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -120,7 +122,7 @@ const Register = () => {
       style={{ backgroundImage: "url('/assets/images/bg3.jpg')" }}
     >
       <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center p-16 pt-40">
-        <div className="relative w-full h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl shadow-lg p-6 flex flex-col gap-6">
+        <div className="relative w-full h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl shadow-lg p-6 flex flex-col gap-6 border-gray-400 border-2">
           {preview && (
             <div className="absolute top-4 right-4">
               <img
@@ -137,8 +139,11 @@ const Register = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4" id="registrationForm">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4"
+                id="registrationForm"
+              >
                 <label className="font-medium text-lg ">Name:</label>
                 <input
                   type="text"
@@ -228,32 +233,23 @@ const Register = () => {
               {errors.profile && (
                 <p className="text-red-500 text-sm">{errors.profile}</p>
               )}
-<div className="flex flex-col items-center gap-2">
-              <button
-                type="button"
-                className="mt-6 bg-blue-800 text-white py-3 px-4 w-80 justify-center rounded-lg font-bold transform hover:scale-105 transition duration-300 shadow-lg"
-                onClick={handleSubmit} 
-              >
-                Register
-              </button>
-
-              <button
-                type="button"
-                className="mt-1 bg-white w-80 text-blue-800 py-3 rounded-lg font-bold flex items-center justify-center shadow-lg border transform hover:scale-105 transition duration-300"
-                onClick={handleGoogleSignIn}
-              >
-                <img
-                  src="/assets/images/google-icon.png"
-                  alt="Google Icon"
-                  className="w-6 h-6 mr-2"
-                />
-                Sign in with Google
-              </button>
+              <div className="flex flex-col items-center gap-2">
+                <button
+                  type="button"
+                  className="mt-6 bg-blue-800 text-white py-3 px-4 w-80 justify-center rounded-lg font-bold transform hover:scale-105 transition duration-300 shadow-lg"
+                  onClick={handleSubmit}
+                >
+                  Register
+                </button>
+                <GoogleSignIn />
               </div>
 
               <p className="text-center mt-4 text-black text-lg tracking-wide font-semibold">
                 Already have an account?{" "}
-                <a href="/login" className="text-blue-800 font-bold underline tracking-wider">
+                <a
+                  href="/login"
+                  className="text-blue-800 font-bold underline tracking-wider"
+                >
                   Login
                 </a>
               </p>

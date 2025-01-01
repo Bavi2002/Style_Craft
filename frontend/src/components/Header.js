@@ -8,7 +8,7 @@ const Header = ({ user, setUser }) => {
   };
 
   return (
-    <header className="flex items-center justify-between font-lora p-3 fixed top-0 w-full bg-white shadow-lg z-50  bg-opacity-50 backdrop-blur-2xl ">
+    <header className="flex items-center justify-between font-lora p-3 fixed top-0 w-full bg-white shadow-lg z-50  bg-opacity-60 backdrop-blur-3xl ">
       <div className="text-5xl ml-3 p-4 font-bold tracking-wider">
         Style Craft
       </div>

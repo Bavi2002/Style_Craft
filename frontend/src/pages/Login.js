@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import GoogleSignIn from "../components/GoogleSignIn";
+
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,18 +102,7 @@ const Login = ({ setUser }) => {
 
           {/* Google Sign-In Button */}
           <div className="mt-4">
-            <button
-              type="button"
-              className="w-full bg-white text-blue-800 py-3 rounded-lg font-bold flex items-center justify-center shadow-lg border transform hover:scale-105 transition duration-300"
-              onClick={handleGoogleSignIn}
-            >
-              <img
-                src="/assets/images/google-icon.png"
-                alt="Google Icon"
-                className="w-6 h-6 mr-2"
-              />
-              Sign in with Google
-            </button>
+          <GoogleSignIn />
           </div>
 
           {/* Register Link */}
