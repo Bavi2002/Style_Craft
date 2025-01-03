@@ -1,10 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
 const cors = require("cors");
+const path = require("path");
+
+const connectDB = require("./config/db");
+const simpleRoutes = require("./routes/simpleRoutes");
 const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
-const path = require("path");
 
 const app = express();
 
@@ -39,6 +41,7 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
+app.use("/api", simpleRoutes);
 
 connectDB();
 

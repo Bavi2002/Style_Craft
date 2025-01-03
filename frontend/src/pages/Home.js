@@ -1,6 +1,41 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+
+const handleEmailChange = (e) => {
+  setEmail(e.target.value);
+}
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+
+    if (!email) {
+      setMessage("Please Enter the Valid Email Address");
+      return;
+    }
+
+    setMessage("");
+    try {
+      const response = await fetch("http://localhost:5000/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage(data.message)
+      } else {
+        setMessage(data.message);
+      }
+    } catch (error) {
+      setMessage("Something Went Wrong Please Try Again Later");
+    }
+  };
   return (
     <div className="font-lora ">
       {/* Section 1 */}
@@ -191,12 +226,14 @@ const Home = () => {
           inbox.
         </p>
         <div className="flex justify-center items-center mt-6">
-          <form className="flex gap-3">
+          <form className="flex gap-3" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email"
               required
-              className="border border-gray-300 pr-36 py-2 pl-6 rounded-xl"
+              value={email}
+              onChange={handleEmailChange}
+              className="border border-gray-300 w-80  py-2 px-3 rounded-xl"
             />
             <button
               type="submit"
@@ -206,6 +243,16 @@ const Home = () => {
             </button>
           </form>
         </div>
+        {message && (
+  <div
+    className={`mt-4 text-lg ${
+      message.toLowerCase().includes('success') ? 'text-green-500' : 'text-red-500'
+    }`}
+  >
+    {message}
+  </div>
+)}
+
       </div>
     </div>
   );

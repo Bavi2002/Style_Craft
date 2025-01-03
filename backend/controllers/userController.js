@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
-const sendOtp = require("../utils/sendOtp");
+const { sendOtp } = require("../utils/sendMail");
 const uploadToAzure = require("../utils/azureBlob");
 
 const register = async (req, res) => {
