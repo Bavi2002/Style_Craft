@@ -49,7 +49,7 @@ const Login = ({ setUser }) => {
       style={{ backgroundImage: "url('/assets/images/bg1.jpg')" }}
     >
       <div className="flex items-center justify-center min-h-screen pt-24">
-        <div className="bg-gray-500 bg-opacity-20 backdrop-blur-lg p-8  rounded-3xl shadow-xl w-96 border-gray-300 border-2">
+        <div className="bg-gray-100 bg-opacity-20 backdrop-blur-lg p-8  rounded-3xl shadow-xl w-96 border-gray-400 border-2">
           <h1 className="text-center text-4xl font-bold text-blue-800 mb-6 mt-4">
             Welcome Back To{" "}
             <span className="text-black text-5xl tracking-wider font-lora ">

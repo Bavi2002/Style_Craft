@@ -8,7 +8,7 @@ const Header = ({ user, setUser }) => {
   };
 
   return (
-    <header className="flex items-center justify-between font-lora p-3 fixed top-0 w-full bg-white shadow-lg z-50  bg-opacity-60 backdrop-blur-3xl ">
+    <header className="flex items-center justify-between font-lora p-3 fixed  top-0 w-full  bg-opacity-80  backdrop-blur-lg shadow-2xl z-50 text-black ">
       <div className="text-5xl ml-3 p-4 font-bold tracking-wider">
         Style Craft
       </div>
@@ -37,14 +37,14 @@ const Header = ({ user, setUser }) => {
           />
           <button
             onClick={handleLogout}
-            className="ml-4 bg-red-500 px-5 py-2 font-medium text-white rounded-lg tracking-wider text-base transform hover:scale-105 transition-transform duration-300"
+            className="ml-4 bg-red-500 px-5 py-2 font-medium text-white rounded-3xl text-center tracking-wider text-base transform hover:scale-105 transition-transform duration-300"
           >
             Logout
           </button>
         </div>
       ) : (
         <Link to={"/"}>
-          <button className="bg-secondary px-7 py-3 mr-9 text-white bord rounded-3xl tracking-wider transform hover:scale-105 transition-transform duration-300">
+          <button className="shadow-lg tracking-wider  bg-black px-7 py-3 mr-9 text-white border border-black bord rounded-3xl  transform hover:scale-105 transition-transform duration-300  ">
             Sign In
           </button>
         </Link>

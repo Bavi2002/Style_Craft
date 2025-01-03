@@ -10,7 +10,7 @@ const register = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message:"User Already Exists" });
+      return res.status(400).json({ message: "User Already Exists" });
     }
 
     //For API Testing
@@ -32,10 +32,12 @@ const register = async (req, res) => {
       email,
       address,
       phone,
-      profile: {
-        buffer: profile.buffer.toString("base64"),
-        filename: profile.originalname,
-      },
+      profile: profile
+        ? {
+            buffer: profile.buffer.toString("base64"),
+            filename: profile.originalname,
+          }
+        : null,
       password: hashPass,
       otp,
       otpExpiry,
@@ -65,32 +67,22 @@ const verify = async (req, res) => {
     if (tempUserData.otpExpiry < Date.now())
       return res.status(400).json({ message: "OTP Has Expired" });
 
+    let profilePhotoUrl =
+      "http://localhost:5000/assets/images/default_profile.png";
+
     // Decode the buffer
     if (tempUserData.profile && tempUserData.profile.buffer) {
       tempUserData.profile.buffer = Buffer.from(
         tempUserData.profile.buffer,
         "base64"
       );
+
+      // Upload Profile Photo to Azure Blob
+      profilePhotoUrl = await uploadToAzure(
+        tempUserData.profile.buffer,
+        tempUserData.profile.filename
+      );
     }
-
-    //Test
-    if (!tempUserData.profile || !tempUserData.profile.buffer) {
-      return res.status(400).json({ message: "Profile photo is required" });
-    }
-
-    if (
-      !Buffer.isBuffer(tempUserData.profile.buffer) ||
-      tempUserData.profile.buffer.length === 0
-    ) {
-      return res.status(400).json({ message: "Invalid Profile Photo" });
-    }
-
-    // Upload Profile Photo to Azure Blob
-    const profilePhotoUrl = await uploadToAzure(
-      tempUserData.profile.buffer,
-      tempUserData.profile.filename
-    );
-
     const newUser = new User({
       name: tempUserData.name,
       email: tempUserData.email,
@@ -130,10 +122,8 @@ const resendOtp = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = Date.now() + 10 * 60 * 1000;
 
-    
     //For TESTING Purpose(delete Later)
     console.log("OTP Is: ", otp);
-
 
     req.session.tempUserData.otp = otp;
     req.session.tempUserData.otpExpiry = otpExpiry;

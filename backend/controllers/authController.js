@@ -24,7 +24,6 @@ const googleSignIn = async (req, res) => {
       user = new User({
         googleId: uid,
         email,
-
         name,
         profilePhoto: picture,
       });

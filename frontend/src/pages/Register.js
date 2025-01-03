@@ -152,7 +152,7 @@ const Register = ({ setUser }) => {
                   onKeyPress={handleKeyPress}
                   onChange={handleChange}
                   required
-                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <label className="font-medium text-lg">Address:</label>
@@ -163,7 +163,7 @@ const Register = ({ setUser }) => {
                   value={formData.address}
                   onKeyPress={handleKeyPress}
                   onChange={handleChange}
-                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <label className="font-medium text-lg">Contact No:</label>
@@ -219,7 +219,7 @@ const Register = ({ setUser }) => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email}</p>
@@ -230,7 +230,7 @@ const Register = ({ setUser }) => {
                 name="profile"
                 accept="image/png, image/jpeg"
                 onChange={handleFileChange}
-                className=" p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className=" p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.profile && (
                 <p className="text-red-500 text-sm">{errors.profile}</p>

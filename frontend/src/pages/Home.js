@@ -5,27 +5,52 @@ const Home = () => {
     <div className="font-lora ">
       {/* Section 1 */}
       <div
-        className="relative flex items-center justify-center h-screen bg-cover bg-center"
+        className="flex flex-wrap justify-between items-center py-16 px-10 lg:px-20 h-screen bg-gradient-to-t from-blue-500 to-blue-800 text-white"
         style={{
-          backgroundImage: "url('/assets/images/bg5.jpg')",
+          backgroundImage: "url('/assets/images/bg6.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-55"></div>
-        <div className="relative z-10 text-center justify-center space-y-6 text-blue-800 px-4 lg:px-2 pb-20 mt-12 bg-white bg-opacity-5 p-9 rounded-lg backdrop-blur-lg shadow-lg w-10/12 lg:w-7/12 border-gray-400 border-2">
-          <h1 className="text-[70px] font-extrabold tracking-wider text-blue-300  font-lora">
-            Welcome to{" "}
-            <span className=" text-black text-[85px]">Style Craft</span>
+        <div className="w-full lg:w-1/2 space-y-8 mb-24">
+          <h1 className="text-4xl lg:text-8xl font-extrabold leading-snug ">
+            Elevate Your Style <br />
+            with <span className="text-black">Style Craft</span>
           </h1>
-          <p className="text-xl w-full lg:w-8/12 mx-auto text-gray-300 font-lora font-medium pb-9">
-            We specialize in creating bespoke clothing tailored to your unique
-            style and needs. Experience the perfect blend of quality,
-            creativity, and craftsmanship.
+
+          <p className="text-lg lg:text-xl text-gray-200 w-5/6 leading-relaxed">
+            Discover modern, custom-tailored clothing that matches your
+            personality. From minimalistic designs to extravagant couture, Style
+            Craft redefines your wardrobe with quality craftsmanship.
           </p>
-          <Link to={"/"}>
-            <button className="bg-blue-600 text-white text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-500 ">
+
+          <div className="space-x-4">
+            <button className="bg-white ahadow-xl text-blue-900 text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
               Get Started
             </button>
-          </Link>
+            <button className="bg-transparent border-2 border-white text-lg px-6 py-3 rounded-full text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <div className="relative w-full lg:w-1/2 mt-10 lg:mt-0 flex justify-center items-center">
+          {/* Custom Bubble Shape */}
+          <svg
+            className="absolute w-[850px] h-[850px] opacity-90 left-12 mb-8 shadow-lg"
+            viewBox="0 0 200 200"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="#ffffff"
+              d="M54.6,-65.3C68.5,-54.9,73.7,-34.7,74.4,-15.7C75.1,3.3,71.4,21.1,62.7,34.7C54,48.2,40.3,57.4,25.6,63.2C10.9,68.9,-5.8,71.2,-20.4,65.9C-34.9,60.6,-47.2,47.8,-56.4,34.1C-65.7,20.3,-71.9,5.6,-71.8,-9C-71.6,-23.7,-65.1,-37.4,-54.6,-47.8C-44,-58.3,-29.3,-65.6,-13.8,-69.8C1.7,-74,34.6,-75.6,54.6,-65.3Z"
+              transform="translate(100 100)"
+            />
+          </svg>
+
+          <img
+            src="/assets/images/rb_54452.png"
+            alt="Clothing Store"
+            className="relative w-[950px] h-[950px] object-contain transform hover:scale-105 transition-transform duration-500 z-10 right-16 "
+          />
         </div>
       </div>
 
@@ -70,12 +95,12 @@ const Home = () => {
       </div>
 
       {/* Section 3 */}
-      <div className="py-10 px-5 lg:px-20 bg-gradient-to-b from-black via-sky-600  to-sky-800">
+      <div className="py-10 px-5 lg:px-20 bg-gradient-to-b from-sky-600 via-sky-300 to-gray-100 rounded-t-3xl">
         <div className="flex justify-between items-center mb-10 ">
           <h1 className="font-bold text-4xl tracking-wide text-center text-white w-full sm:w-auto">
             Top Sales🔥
           </h1>
-          <button className="font-medium tracking-wide text-base bg-blue-600 transform hover:scale-105 transition-all duration-300 text-white  px-4 py-3 rounded-3xl border border-gray-400">
+          <button className="font-medium tracking-wide text-base bg-black  transform hover:scale-105 transition-all duration-300 text-white  px-4 py-3 rounded-3xl">
             Shop More
           </button>
         </div>
@@ -161,7 +186,7 @@ const Home = () => {
       {/* Section 4 */}
       <div className="bg-white py-12 px-5 lg:px-20 text-center mx-auto">
         <h1 className="font-semibold text-3xl">Subscribe To Our Newsletter</h1>
-        <p className="mt-3 text-lg">
+        <p className="mt-3 text-lg ">
           Get the latest updates, news, and exclusive offers directly in your
           inbox.
         </p>
