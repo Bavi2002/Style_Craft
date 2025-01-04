@@ -6,7 +6,9 @@ const Subscribe = async (req, res) => {
   try {
     const isSubscribed = await Subscription.findOne({ email });
     if (isSubscribed) {
-      return res.status(400).json({success: false, message: "Email Already Subscribed" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email Already Subscribed" });
     }
 
     const newSubscription = new Subscription({
@@ -17,10 +19,9 @@ const Subscribe = async (req, res) => {
 
     await sendSubcription(email);
 
-    res.status(200).json({success: true, message:"Subscribed Successfully"})
+    res.status(200).json({ success: true, message: "Subscribed Successfully" });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({success: false, message: "Failed to Subscribe" });
+    res.status(500).json({ success: false, message: "Failed to Subscribe" });
   }
 };
 

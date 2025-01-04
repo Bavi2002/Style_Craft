@@ -5,9 +5,9 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
 
-const handleEmailChange = (e) => {
-  setEmail(e.target.value);
-}
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
   const handleSubscribe = async (e) => {
     e.preventDefault();
 
@@ -16,19 +16,19 @@ const handleEmailChange = (e) => {
       return;
     }
 
-    setMessage("");
     try {
       const response = await fetch("http://localhost:5000/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        setMessage(data.message)
+        setMessage(data.message);
       } else {
         setMessage(data.message);
       }
@@ -244,15 +244,16 @@ const handleEmailChange = (e) => {
           </form>
         </div>
         {message && (
-  <div
-    className={`mt-4 text-lg ${
-      message.toLowerCase().includes('success') ? 'text-green-500' : 'text-red-500'
-    }`}
-  >
-    {message}
-  </div>
-)}
-
+          <div
+            className={`mt-4 text-lg ${
+              message.toLowerCase().includes("success")
+                ? "text-green-500"
+                : "text-red-500"
+            }`}
+          >
+            {message}
+          </div>
+        )}
       </div>
     </div>
   );
