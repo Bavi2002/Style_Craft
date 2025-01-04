@@ -46,11 +46,13 @@ const GoogleSignIn = ({ setUser }) => {
         navigate("/home");
       }
     } catch (error) {
-        if (error.message === "Network Error") {
-            alert("Network Error. Please check your internet connection and try again.");
-          } else {
-            alert("Google Sign-In failed. Please try again.");
-          }
+      if (error.message === "Network Error") {
+        alert(
+          "Network Error. Please check your internet connection and try again."
+        );
+      } else {
+        alert("Google Sign-In failed. Please try again.");
+      }
       console.error("Error during Google sign-in:", error.message);
     } finally {
       setLoading(false);
@@ -61,7 +63,7 @@ const GoogleSignIn = ({ setUser }) => {
     <div className="flex flex-col items-center gap-2">
       <button
         type="button"
-        className="mt-1 bg-white w-80 text-blue-800 py-3 rounded-lg font-bold flex items-center justify-center shadow-lg border transform hover:scale-105 transition duration-300"
+        className="mt-1 bg-white px-3 text-blue-800 py-3 rounded-lg font-bold flex items-center justify-center shadow-lg border transform hover:scale-105 transition duration-300 w-full"
         onClick={handleGoogleSignIn}
         disabled={loading}
       >

@@ -37,40 +37,39 @@ const Home = () => {
     }
   };
   return (
-    <div className="font-lora ">
+    <div className="font-lora">
       {/* Section 1 */}
       <div
-        className="flex flex-wrap justify-between items-center py-16 px-10 lg:px-20 h-screen bg-gradient-to-t from-blue-500 to-blue-800 text-white"
+        className="flex flex-wrap justify-between items-center py-16 px-5 sm:px-10 lg:px-20 h-screen bg-gradient-to-t from-blue-500 to-blue-800 text-white"
         style={{
           backgroundImage: "url('/assets/images/bg6.jpg')",
         }}
       >
-        <div className="w-full lg:w-1/2 space-y-8 mb-24">
-          <h1 className="text-4xl lg:text-8xl font-extrabold leading-snug ">
+        <div className="w-full lg:w-1/2 space-y-8 mb-24 text-center lg:text-left pt-24">
+          <h1 className="text-3xl sm:text-4xl lg:text-8xl font-extrabold leading-snug">
             Elevate Your Style <br />
             with <span className="text-black">Style Craft</span>
           </h1>
 
-          <p className="text-lg lg:text-xl text-gray-200 w-5/6 leading-relaxed">
+          <p className="text-sm sm:text-lg lg:text-xl text-gray-200 w-full lg:w-5/6 leading-relaxed">
             Discover modern, custom-tailored clothing that matches your
             personality. From minimalistic designs to extravagant couture, Style
             Craft redefines your wardrobe with quality craftsmanship.
           </p>
 
-          <div className="space-x-4">
-            <button className="bg-white ahadow-xl text-blue-900 text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <div className="space-x-0 sm:space-x-4 flex flex-col sm:flex-row items-center">
+            <button className="bg-white text-blue-900 text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
               Get Started
             </button>
-            <button className="bg-transparent border-2 border-white text-lg px-6 py-3 rounded-full text-white shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <button className="bg-transparent border-2 border-white text-lg px-6 py-3 rounded-full text-white shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto mt-3 sm:mt-0">
               Learn More
             </button>
           </div>
         </div>
 
         <div className="relative w-full lg:w-1/2 mt-10 lg:mt-0 flex justify-center items-center">
-          {/* Custom Bubble Shape */}
           <svg
-            className="absolute w-[850px] h-[850px] opacity-90 left-12 mb-8 shadow-lg"
+            className="absolute w-60 sm:w-[850px] h-60 sm:h-[850px] opacity-90 left-12 mb-8 "
             viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -84,14 +83,14 @@ const Home = () => {
           <img
             src="/assets/images/rb_54452.png"
             alt="Clothing Store"
-            className="relative w-[950px] h-[950px] object-contain transform hover:scale-105 transition-transform duration-500 z-10 right-16 "
+            className="relative w-40 sm:w-[950px] h-40 sm:h-[950px] object-contain transform hover:scale-105 transition-transform duration-500 z-10 right-0 sm:right-16"
           />
         </div>
       </div>
 
       {/* Section 2 */}
-      <div className="bg-white py-16 px-10 lg:px-20 text-center">
-        <h2 className="text-4xl font-bold text-gray-700 mb-8">
+      <div className="bg-white py-16 px-5 sm:px-10 lg:px-20 text-center">
+        <h2 className="text-2xl sm:text-4xl font-bold text-gray-700 mb-8">
           Why Choose <span className="text-secondary">Style Craft</span>?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -130,16 +129,16 @@ const Home = () => {
       </div>
 
       {/* Section 3 */}
-      <div className="py-10 px-5 lg:px-20 bg-gradient-to-b from-sky-600 via-sky-300 to-gray-100 rounded-t-3xl">
-        <div className="flex justify-between items-center mb-10 ">
-          <h1 className="font-bold text-4xl tracking-wide text-center text-white w-full sm:w-auto">
+      <div className="py-10 px-5 sm:px-10 lg:px-20 bg-gradient-to-b from-sky-600 via-sky-300 to-gray-100 rounded-t-3xl">
+        <div className="flex flex-wrap justify-between items-center mb-10">
+          <h1 className="font-bold text-xl sm:text-4xl text-center text-white w-full sm:w-auto ">
             Top Sales🔥
           </h1>
-          <button className="font-medium tracking-wide text-base bg-black  transform hover:scale-105 transition-all duration-300 text-white  px-4 py-3 rounded-3xl">
+          <button className="mt-4 sm:mt-0 bg-black text-white px-4 py-2 rounded-3xl ">
             Shop More
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
             <img
               src="/assets/images/sample1.jpg"
@@ -219,25 +218,30 @@ const Home = () => {
       </div>
 
       {/* Section 4 */}
-      <div className="bg-white py-12 px-5 lg:px-20 text-center mx-auto">
-        <h1 className="font-semibold text-3xl">Subscribe To Our Newsletter</h1>
-        <p className="mt-3 text-lg ">
+      <div className="bg-white py-12 px-5 sm:px-10 lg:px-20 text-center mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-semibold">
+          Subscribe To Our Newsletter
+        </h1>
+        <p className="mt-3 text-sm sm:text-lg">
           Get the latest updates, news, and exclusive offers directly in your
           inbox.
         </p>
-        <div className="flex justify-center items-center mt-6">
-          <form className="flex gap-3" onSubmit={handleSubscribe}>
+        <div className="flex justify-center mt-6">
+          <form
+            className="flex flex-wrap gap-3 w-full sm:w-auto"
+            onSubmit={handleSubscribe}
+          >
             <input
               type="email"
               placeholder="Enter your email"
               required
               value={email}
               onChange={handleEmailChange}
-              className="border border-gray-300 w-80  py-2 px-3 rounded-xl"
+              className="w-full sm:w-96 px-3 py-2 border border-gray-300 rounded-xl"
             />
             <button
               type="submit"
-              className="bg-black px-6 py-2 text-white tracking-wider rounded-xl  shadow-lg transform hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="w-40 sm:w-auto bg-black text-white px-6 py-2 tracking-wider rounded-xl  shadow-lg transform hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Subscribe
             </button>

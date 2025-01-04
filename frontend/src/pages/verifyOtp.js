@@ -82,8 +82,8 @@ const VerifyOtp = () => {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/images/bg2.jpg')" }}
     >
-      <div className="flex items-center justify-center min-h-screen bg-opacity-50 pt-12">
-        <div className="bg-white bg-opacity-20 backdrop-blur-lg p-8 rounded-3xl shadow-xl w-96 border-white border-2">
+      <div className="flex items-center justify-center min-h-screen bg-opacity-50 pt-12 px-8">
+        <div className="bg-white bg-opacity-20 backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96 border-white border-2">
           <h1 className="text-center text-4xl font-bold text-blue-800 mb-6">
             Verify OTP
           </h1>
@@ -97,7 +97,7 @@ const VerifyOtp = () => {
                 value={otp}
                 onChange={handleOtpChange}
                 placeholder="Enter your OTP"
-                className="w-full px-4 py-2 rounded-lg border bg-white bg-opacity-40 placeholder:text-gray-600 placeholder:text-base placeholder:tracking-wide shadow-lg backdrop-blur-lg text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 rounded-lg border bg-white bg-opacity-40 placeholder:text-gray-600 placeholder:text-base placeholder:tracking-wide shadow-lg backdrop-blur-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors && <p className="text-red-500 text-sm mt-1">{errors}</p>}
             </div>

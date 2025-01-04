@@ -120,7 +120,7 @@ const Register = ({ setUser }) => {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/images/bg3.jpg')" }}
     >
-      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center p-16 pt-40">
+      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center px-5 pt-20">
         <div className="relative w-full h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl shadow-lg p-6 flex flex-col gap-6 border-gray-400 border-2">
           {preview && (
             <div className="absolute top-4 right-4">
@@ -143,7 +143,7 @@ const Register = ({ setUser }) => {
                 className="flex flex-col gap-4"
                 id="registrationForm"
               >
-                <label className="font-medium text-lg ">Name:</label>
+                <label className="font-medium text-lg">Name:</label>
                 <input
                   type="text"
                   name="name"
@@ -238,11 +238,16 @@ const Register = ({ setUser }) => {
               <div className="flex flex-col items-center gap-2">
                 <button
                   type="button"
-                  className="mt-6 bg-blue-800 text-white py-3 px-4 w-80 justify-center rounded-lg font-bold transform hover:scale-105 transition duration-300 shadow-lg"
+                  className="mt-6 bg-blue-800 text-white py-3 px-4  justify-center rounded-lg font-bold transform hover:scale-105 transition duration-300 shadow-lg w-full"
                   onClick={handleSubmit}
                 >
                   Register
                 </button>
+                <div className="flex items-center mt-4 w-full">
+                  <hr className="flex-1 border-gray-400" />
+                  <span className="mx-4 text-gray-700 font-semibold">or</span>
+                  <hr className="flex-1 border-gray-400" />
+                </div>
                 <GoogleSignIn setUser={setUser} />
               </div>
               <p className="text-center mt-4 text-black text-lg tracking-wide font-semibold">

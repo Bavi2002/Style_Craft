@@ -48,8 +48,8 @@ const Login = ({ setUser }) => {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/images/bg1.jpg')" }}
     >
-      <div className="flex items-center justify-center min-h-screen pt-24">
-        <div className="bg-gray-100 bg-opacity-20 backdrop-blur-lg p-8  rounded-3xl shadow-xl w-96 border-gray-400 border-2">
+      <div className="flex items-center justify-center min-h-screen pt-24 px-4">
+        <div className="bg-gray-100 bg-opacity-20 backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96 border-gray-400 border-2">
           <h1 className="text-center text-4xl font-bold text-blue-800 mb-6 mt-4">
             Welcome Back To{" "}
             <span className="text-black text-5xl tracking-wider font-lora ">
@@ -72,7 +72,7 @@ const Login = ({ setUser }) => {
                 onChange={handleEmailChange}
                 value={email}
                 required
-                className="placeholder:text-gray-600 tracking-wider  w-full px-4 py-2 border bg-white bg-opacity-70 backdrop-blur-lg border-gray-400 shadow-lg rounded-lg   text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="placeholder:text-gray-600 tracking-wider w-full px-4 py-2 border bg-white bg-opacity-70 backdrop-blur-lg border-gray-400 shadow-lg rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
@@ -85,7 +85,7 @@ const Login = ({ setUser }) => {
                 onChange={handlePasswordChange}
                 value={password}
                 required
-                className="placeholder:text-gray-600 tracking-wider w-full px-4 py-2 border bg-white bg-opacity-70 backdrop-blur-lg border-gray-400 shadow-lg rounded-lg   text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="placeholder:text-gray-600 tracking-wider w-full px-4 py-2 border bg-white bg-opacity-70 backdrop-blur-lg border-gray-400 shadow-lg rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             {errors && <p className="text-red-500 text-sm mt-1">{errors}</p>}
@@ -96,7 +96,11 @@ const Login = ({ setUser }) => {
               LogIn
             </button>
           </form>
-
+          <div className="flex items-center mt-4 w-full">
+            <hr className="flex-1 border-gray-400" />
+            <span className="mx-4 text-gray-700 font-semibold">or</span>
+            <hr className="flex-1 border-gray-400" />
+          </div>
           {/* Google Sign-In Button */}
           <div className="mt-4">
             <GoogleSignIn setUser={setUser} />
