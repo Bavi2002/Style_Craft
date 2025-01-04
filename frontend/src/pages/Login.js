@@ -101,7 +101,7 @@ const Login = ({ setUser }) => {
             <span className="mx-4 text-gray-700 font-semibold">or</span>
             <hr className="flex-1 border-gray-400" />
           </div>
-          {/* Google Sign-In Button */}
+
           <div className="mt-4">
             <GoogleSignIn setUser={setUser} />
           </div>

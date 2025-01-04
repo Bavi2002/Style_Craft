@@ -20,7 +20,6 @@ const Header = ({ user, setUser }) => {
         Style Craft
       </div>
 
-      {/* Desktop Navigation */}
       <nav className="hidden md:block">
         <ul className="flex space-x-10 mr-4 items-center text-xl font-medium tracking-widest">
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
@@ -38,7 +37,6 @@ const Header = ({ user, setUser }) => {
         </ul>
       </nav>
 
-      {/* User Section or Sign In */}
       {user ? (
         <div className="flex items-center space-x-4 mr-9">
           <img
@@ -61,7 +59,6 @@ const Header = ({ user, setUser }) => {
         </Link>
       )}
 
-      {/* Hamburger Icon for Mobile */}
       <div className="md:hidden flex items-center mr-4" onClick={toggleMenu}>
         <button className="flex flex-col space-y-2">
           <div className="w-6 h-1 bg-black rounded"></div>
@@ -70,7 +67,6 @@ const Header = ({ user, setUser }) => {
         </button>
       </div>
 
-      {/* Mobile Navigation Menu */}
       <nav
         className={`${
           isMenuOpen ? "block" : "hidden"

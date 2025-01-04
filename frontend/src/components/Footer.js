@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <footer className="bg-gray-950 text-white py-10 font-lora">
       <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16">
-        {/* Company Section */}
         <div className="space-y-4 w-72">
           <h1 className="text-4xl font-bold text-highlight">Style Craft</h1>
           <p className="text-base leading-relaxed text-gray-400">
@@ -14,7 +13,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Location Section */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold scale-110 text-highlight">
             Location
@@ -29,7 +27,6 @@ const Footer = () => {
           <p className="text-lg text-gray-400">Phone: +94 123 456 789</p>
         </div>
 
-        {/* Quick Links Section */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-highlight">Quick Links</h2>
           <ul className="text-lg text-gray-400 space-y-2">
@@ -48,7 +45,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Connect with Us Section */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-highlight">Connect with Us</h2>
           <p className="text-lg text-gray-400">
@@ -95,7 +91,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Footer Bottom Section */}
       <div className="mt-10 border-t border-gray-700 pt-4 text-center text-sm text-gray-500">
         <p>
           &copy; {new Date().getFullYear()} Style Craft. All rights reserved.
