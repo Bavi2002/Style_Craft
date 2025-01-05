@@ -3,7 +3,7 @@ require("@fortawesome/fontawesome-free/css/all.min.css");
 const Footer = () => {
   return (
     <footer className="bg-gray-950 text-white py-10 font-lora">
-      <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16">
+      <div className="container mx-9 lg:mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-16">
         <div className="space-y-4 w-72">
           <h1 className="text-4xl font-bold text-highlight">Style Craft</h1>
           <p className="text-base leading-relaxed text-gray-400">
@@ -14,7 +14,7 @@ const Footer = () => {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-xl font-bold scale-110 text-highlight">
+          <h2 className="text-xl font-bold  text-highlight">
             Location
           </h2>
           <address className="text-lg not-italic text-gray-400">

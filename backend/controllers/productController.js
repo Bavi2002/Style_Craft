@@ -12,7 +12,7 @@ const addProduct = async (req, res) => {
     }
 
     if(!files || files.length < 2 || files.length > 5){
-        res.status(400).json({message: "Upload between 2 to 5 Images"});
+        return res.status(400).json({message: "Upload between 2 to 5 Images"});
     }
 
     const imageUrls = await Promise.all(

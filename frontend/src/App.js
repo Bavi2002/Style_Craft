@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import VerifyOtp from "./pages/VerifyOtp";
 import Login from "./pages/Login";
+import Product from "./pages/Product";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/verify" element={<VerifyOtp />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/product" element={<Product />} />
         </Routes>
         <Footer />
       </div>

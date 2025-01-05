@@ -26,7 +26,7 @@ const Header = ({ user, setUser }) => {
             <a href="/home">Home</a>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="#">Product</a>
+            <a href="/product">Product</a>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
             <a href="#">About Us</a>
