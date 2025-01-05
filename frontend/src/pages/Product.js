@@ -29,7 +29,7 @@ const Product = () => {
         Discover our exclusive collection of high-quality products.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-12 p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pt-12 p-8">
         {products.length > 0 ? (
           products.map((product) => (
             <ProductCard key={product._id} product={product} />

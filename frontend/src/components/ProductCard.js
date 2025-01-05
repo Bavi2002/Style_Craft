@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
         <img
           src={product.image[currentImageIndex]}
           alt={product.name}
-          className="w-full h-60 sm:h-72 md:h-80 object-cover"
+          className="w-full h-60 sm:h-72 md:h-40 object-cover"
         />
 
         <button
@@ -73,45 +73,50 @@ const ProductCard = ({ product }) => {
           {product.name}
         </p>
 
-        <p className="text-gray-600 text-sm sm:text-base mt-2 leading-snug">
+        <p className="text-gray-600 text-sm sm:text-base mt-1 leading-snug ">
           {product.description}
         </p>
 
-        <div className="flex justify-between items-center mt-4">
-          <div>
+        <div className="mt-3">
+          <div className="flex justify-start">
             {product.discount > 0 ? (
               <div className="flex items-center space-x-2">
-                <span className="text-green-600 font-semibold text-2xl">
-                  Rs. {Math.round(product.price * (1 - product.discount / 100))}
+                <span className="text-green-600 font-semibold text-lg">
+                  Rs.{" "}
+                  {Math.round(
+                    product.price * (1 - product.discount / 100)
+                  ).toFixed(2)}
                 </span>
 
                 <span className="text-gray-500 line-through font-medium text-base">
-                  Rs. {product.price}
+                  Rs. {product.price.toFixed(2)}
                 </span>
               </div>
             ) : (
-              <span className="text-gray-800 font-semibold text-2xl">
-                Rs. {product.price}
+              <span className="text-gray-800 font-semibold text-lg">
+                Rs. {product.price.toFixed(2)}
               </span>
             )}
           </div>
 
-          <div className="flex items-center space-x-1">
-            <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
-            <span className="text-gray-500 text-sm">
-              ({Math.floor(Math.random() * (150 - 10 + 1)) + 10})
-            </span>
-          </div>
-        </div>
+          <div className="flex items-center justify-between mt-2">
+            <div
+              className={`py-1 px-3 inline-block rounded-lg font-medium text-sm ${
+                product.stock > 0
+                  ? "bg-green-200 text-green-700"
+                  : "bg-red-200 text-red-700"
+              }`}
+            >
+              {product.stock > 0 ? "In Stock" : "Out of Stock"}
+            </div>
 
-        <div
-          className={`mt-3 py-1 px-3 inline-block rounded-lg font-medium text-sm ${
-            product.stock > 0
-              ? "bg-green-200 text-green-700"
-              : "bg-red-200 text-red-700"
-          }`}
-        >
-          {product.stock > 0 ? "In Stock" : "Out of Stock"}
+            <div className="flex items-center space-x-1">
+              <span className="text-yellow-500 text-base">⭐⭐⭐⭐</span>
+              <span className="text-gray-500 text-sm">
+                ({Math.floor(Math.random() * (150 - 10 + 1)) + 10})
+              </span>
+            </div>
+          </div>
         </div>
 
         <button
