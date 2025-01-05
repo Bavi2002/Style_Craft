@@ -80,7 +80,8 @@ const verify = async (req, res) => {
       // Upload Profile Photo to Azure Blob
       profilePhotoUrl = await uploadToAzure(
         tempUserData.profile.buffer,
-        tempUserData.profile.filename
+        tempUserData.profile.filename,
+        "profile-photos"
       );
     }
     const newUser = new User({

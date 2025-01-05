@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const simpleRoutes = require("./routes/simpleRoutes");
 const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(
 
 app.use("/api/users", userRoutes);
 app.use("/api", simpleRoutes);
+app.use("/api/products", productRoutes);
 
 connectDB();
 

@@ -3,7 +3,7 @@ const mime = require("mime-types");
 const { BlobServiceClient } = require("@azure/storage-blob");
 const { v4: uuidv4 } = require("uuid");
 
-const uploadToAzure = async (fileBuffer, fileName) => {
+const uploadToAzure = async (fileBuffer, fileName, containerName) => {
   const AZURE_STORAGE_CONNECTION_STRING = process.env.AZURE_CON;
 
   if (!AZURE_STORAGE_CONNECTION_STRING) {
@@ -14,7 +14,7 @@ const uploadToAzure = async (fileBuffer, fileName) => {
     AZURE_STORAGE_CONNECTION_STRING
   );
   const containerClient =
-    blobServiceClient.getContainerClient("profile-photos");
+    blobServiceClient.getContainerClient(containerName);
 
   await containerClient.createIfNotExists();
 
