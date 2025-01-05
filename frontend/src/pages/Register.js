@@ -118,10 +118,10 @@ const Register = ({ setUser }) => {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/assets/images/bg3.jpg')" }}
+      style={{ backgroundImage: "url('/assets/images/bg8.jpg')" }}
     >
       <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center px-5 pt-20">
-        <div className="relative w-full h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl shadow-lg p-6 flex flex-col gap-6 border-gray-400 border-2">
+        <div className="relative w-full h-auto bg-gray-200 bg-opacity-25 backdrop-blur-xl rounded-3xl shadow-lg p-6 flex flex-col gap-6  border border-gray-300">
           {preview && (
             <div className="absolute top-4 right-4">
               <img
@@ -132,10 +132,11 @@ const Register = ({ setUser }) => {
             </div>
           )}
 
-          <h1 className="text-center text-5xl text-blue-800 font-extrabold tracking-wider mb-5">
-            SignIn
+          <h1 className="text-center text-5xl text-black font-extrabold tracking-wider mb-2">
+            Welcome To <span className="text-blue-700 text-6xl">Style Craft</span>
+           
           </h1>
-
+          <span className="text-4xl text-center mb-5 font-semibold"> SignIn</span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <form
@@ -152,7 +153,7 @@ const Register = ({ setUser }) => {
                   onKeyPress={handleKeyPress}
                   onChange={handleChange}
                   required
-                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <label className="font-medium text-lg">Address:</label>
@@ -163,7 +164,7 @@ const Register = ({ setUser }) => {
                   value={formData.address}
                   onKeyPress={handleKeyPress}
                   onChange={handleChange}
-                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <label className="font-medium text-lg">Contact No:</label>
@@ -174,12 +175,12 @@ const Register = ({ setUser }) => {
                   onKeyPress={handleKeyPress}
                   value={formData.phone}
                   onChange={handleChange}
-                  className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.phone && (
                   <p className="text-red-500 text-sm">{errors.phone}</p>
                 )}
-                <label className="text-xl font-bold">Password:</label>
+                <label className="text-lg font-medium">Password:</label>
                 <input
                   type="password"
                   name="password"
@@ -187,7 +188,7 @@ const Register = ({ setUser }) => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-white"
+                  className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.password && (
                   <p className="text-red-500 text-sm">{errors.password}</p>
@@ -200,7 +201,7 @@ const Register = ({ setUser }) => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="placeholder:tracking-wide placeholder:text-base placeholder:text-white p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5"
+                  className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.confirmPassword && (
                   <p className="text-red-500 text-sm">
@@ -219,7 +220,7 @@ const Register = ({ setUser }) => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="placeholder:text-gray-500 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="placeholder:text-gray-600 placeholder:tracking-wide placeholder:text-base p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
                 <p className="text-red-500 text-sm">{errors.email}</p>
@@ -244,9 +245,9 @@ const Register = ({ setUser }) => {
                   Register
                 </button>
                 <div className="flex items-center mt-4 w-full">
-                  <hr className="flex-1 border-gray-400" />
+                  <hr className="flex-1 border-gray-600" />
                   <span className="mx-4 text-gray-700 font-semibold">or</span>
-                  <hr className="flex-1 border-gray-400" />
+                  <hr className="flex-1 border-gray-600" />
                 </div>
                 <GoogleSignIn setUser={setUser} />
               </div>

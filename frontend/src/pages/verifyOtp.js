@@ -80,10 +80,10 @@ const VerifyOtp = () => {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/assets/images/bg2.jpg')" }}
+      style={{ backgroundImage: "url('/assets/images/bg9.jpg')" }}
     >
       <div className="flex items-center justify-center min-h-screen bg-opacity-50 pt-12 px-8">
-        <div className="bg-white bg-opacity-20 backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96 border-white border-2">
+        <div className="bg-white bg-opacity-25 border-gray-300 border backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96">
           <h1 className="text-center text-4xl font-bold text-blue-800 mb-6">
             Verify OTP
           </h1>

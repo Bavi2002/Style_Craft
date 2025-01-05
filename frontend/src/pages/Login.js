@@ -46,7 +46,7 @@ const Login = ({ setUser }) => {
   return (
     <div
       className="relative min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/assets/images/bg1.jpg')" }}
+      style={{ backgroundImage: "url('/assets/images/bg5.jpg')" }}
     >
       <div className="flex items-center justify-center min-h-screen pt-24 px-4">
         <div className="bg-gray-100 bg-opacity-20 backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96 border-gray-400 border-2">
@@ -111,7 +111,7 @@ const Login = ({ setUser }) => {
               Do not have an account?{" "}
               <a
                 href="/"
-                className="text-blue-200 font-medium underline tracking-wider text-xl"
+                className="text-blue-800 font-bold underline tracking-wide"
               >
                 Register
               </a>
