@@ -229,7 +229,7 @@ const Register = ({ setUser }) => {
               <input
                 type="file"
                 name="profile"
-                accept="image/png, image/jpeg"
+                accept=""
                 onChange={handleFileChange}
                 className=" p-3 border bg-white bg-opacity-40 backdrop-blur-lg border-gray-200 shadow-xl rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
