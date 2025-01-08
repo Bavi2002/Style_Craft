@@ -10,9 +10,10 @@ const Header = ({ user, setUser }) => {
   return (
     <header className="fixed top-0 left-0 h-full bg-opacity-80 backdrop-blur-lg shadow-2xl z-50 w-80 md:w-60 bg-white text-black font-lora">
       <div className="flex flex-col items-center p-5">
-        <div className="text-5xl font-bold tracking-wider mb-10">
-          Style <br />
-          Craft
+        <h1 className="text-2xl mb-7 font-medium">Style Craft</h1>
+        <div className="text-4xl text-center font-bold tracking-wider mb-10">
+          Admin <br />
+          Panel
         </div>
 
         <nav className="flex flex-col space-y-8 items-center text-xl font-medium tracking-widest">
@@ -23,7 +24,7 @@ const Header = ({ user, setUser }) => {
             Add Products
           </a>
           <a
-            href="/product"
+            href="/view"
             className="w-full text-center px-4 py-2 transform hover:scale-110 transition-transform duration-300"
           >
             View Product
