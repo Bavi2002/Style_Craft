@@ -62,4 +62,31 @@ const sendSubcription = async (email) => {
   });
 };
 
-module.exports = { sendOtp, sendSubcription };
+const sendContact = async (email, name) => {
+  await transporter.sendMail({
+    from: process.env.GMAIL,
+    to: email,
+    subject: "Thank You for Contacting Us",
+    html: `
+        <div style="font-family: 'Arial', sans-serif; line-height: 1.5; color: #333; background-color: #f4f4f4; padding: 20px; max-width: 600px; margin: 0 auto; border-radius: 10px;">
+            <div style="background-color: #ffffff; padding: 30px; border-radius: 10px;">
+                <h2 style="color: #4CAF50; font-size: 24px; text-align: center; margin-bottom: 10px;">Thank You for Reaching Out!</h2>
+                <p style="font-size: 16px; color: #333; text-align: center; margin-bottom: 20px;">Dear ${name},</p>
+                <p style="font-size: 18px; color: #555; text-align: center; margin-bottom: 20px;">
+                    We have received your message and appreciate you taking the time to contact us.
+                </p>
+                <p style="font-size: 16px; color: #777; text-align: center; margin-bottom: 30px;">
+                    Our team will review your query and get back to you as soon as possible. In the meantime, feel free to browse through our website or reach out directly at ${process.env.CONTACT_EMAIL}.
+                </p>
+                <p style="font-size: 16px; color: #333; text-align: center; margin-bottom: 10px;">Best Regards,</p>
+                <p style="font-size: 16px; color: #333; text-align: center; font-weight: bold;">Style Craft Team</p>
+            </div>
+        </div>
+    `,
+});
+};
+
+
+
+
+module.exports = { sendOtp, sendSubcription, sendContact };

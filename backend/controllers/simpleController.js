@@ -1,5 +1,6 @@
 const Subscription = require("../models/Subscription");
-const { sendSubcription } = require("../utils/sendMail");
+const { sendSubcription, sendContact } = require("../utils/sendMail");
+const contact = require("../models/Contact");
 
 const Subscribe = async (req, res) => {
   const { email } = req.body;
@@ -25,4 +26,26 @@ const Subscribe = async (req, res) => {
   }
 };
 
-module.exports = Subscribe;
+const Contact = async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    const newContact = new contact({
+      name,
+      email,
+      message,
+    });  
+
+    await newContact.save();
+    await sendContact(email,name);
+
+    res
+      .status(200)
+      .json({success:true, message: "Message Received! We'll Get Back To You Soon" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({success:false, message: "An Error occured. Please try again Later" });
+  }
+};
+
+module.exports = { Subscribe, Contact };

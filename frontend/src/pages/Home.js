@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products");
+        setProducts(response.data.slice(0, 5));
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -129,7 +146,7 @@ const Home = () => {
       </div>
 
       {/* Section 3 */}
-      <div className="py-10 px-5 sm:px-10 lg:px-20 bg-gradient-to-b from-sky-600 via-sky-300 to-gray-100 rounded-t-3xl">
+      <div className="py-10 px-5 sm:px-10 lg:px-20 bg-gradient-to-b from-sky-600 via-sky-300 to-gray-100 rounded-3xl">
         <div className="flex flex-wrap justify-between items-center mb-10">
           <h1 className="font-bold text-xl sm:text-4xl text-center text-white w-full sm:w-auto ">
             Top Sales🔥
@@ -138,82 +155,22 @@ const Home = () => {
             Shop More
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-            <img
-              src="/assets/images/sample1.jpg"
-              alt="Sample"
-              className="w-full h-60 object-cover"
-            />
-            <div className="p-6">
-              <p className="text-center font-bold text-lg text-gray-800">
-                Customized Top for Women
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-gray-700 font-medium">
-                  <span className="font-bold">Price:</span> Rs.2000.00
-                </span>
-                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))
+          ) : (
+            <div className="col-span-full flex justify-center items-center">
+              <div className="flex flex-col items-center space-y-4">
+                {/* Loading Animation */}
+                <div className="w-16 h-16 border-4 border-blue-900 border-t-transparent border-dashed rounded-full animate-spin"></div>
+                <p className="text-lg font-medium text-gray-600">
+                  Loading products...
+                </p>
               </div>
             </div>
-          </div>
-
-          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-            <img
-              src="/assets/images/sample2.jpg"
-              alt="Sample"
-              className="w-full h-60 object-cover"
-            />
-            <div className="p-6">
-              <p className="text-center font-bold text-lg text-gray-800">
-                Customized Top for Women
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-gray-700 font-medium">
-                  <span className="font-bold">Price:</span> Rs.2000.00
-                </span>
-                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-            <img
-              src="/assets/images/sample3.jpg"
-              alt="Sample"
-              className="w-full h-60 object-cover"
-            />
-            <div className="p-6">
-              <p className="text-center font-bold text-lg text-gray-800">
-                Customized Top for Women
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-gray-700 font-medium">
-                  <span className="font-bold">Price:</span> Rs.2000.00
-                </span>
-                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white shadow-lg hover:shadow-2xl rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-            <img
-              src="/assets/images/sample4.jpg"
-              alt="Sample"
-              className="w-full h-60 object-cover"
-            />
-            <div className="p-6">
-              <p className="text-center font-bold text-lg text-gray-800">
-                Customized Top for Women
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <span className="text-gray-700 font-medium">
-                  <span className="font-bold">Price:</span> Rs.2000.00
-                </span>
-                <span className="text-yellow-500 text-lg">⭐⭐⭐⭐</span>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 

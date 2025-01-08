@@ -21,7 +21,7 @@ const Register = ({ setUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value })); // Use functional update
     validateField(name, value);
   };
 
@@ -120,23 +120,22 @@ const Register = ({ setUser }) => {
       className="relative min-h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/assets/images/bg8.jpg')" }}
     >
-      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center px-5 pt-20">
+      <div className="font-lora container mx-auto w-full max-w-4xl min-h-screen flex flex-col items-center justify-center px-5 pt-36 pb-20">
         <div className="relative w-full h-auto bg-gray-200 bg-opacity-25 backdrop-blur-xl rounded-3xl shadow-lg p-6 flex flex-col gap-6  border border-gray-300">
+          <h1 className="text-center text-5xl text-black font-extrabold tracking-wider ">
+            Welcome To{" "}
+            <span className="text-blue-700 text-6xl">Style Craft</span>
+          </h1>
+          <span className="text-4xl text-center font-semibold"> SignIn</span>
           {preview && (
-            <div className="absolute top-4 right-4">
+            <div className="flex justify-center items-center">
               <img
                 src={preview}
                 alt="Preview"
-                className="w-24 h-24 rounded-full border-4 border-cyan-700 shadow-lg"
+                className="w-24 h-24 rounded-full border border-black shadow-lg"
               />
             </div>
           )}
-
-          <h1 className="text-center text-5xl text-black font-extrabold tracking-wider mb-2">
-            Welcome To <span className="text-blue-700 text-6xl">Style Craft</span>
-           
-          </h1>
-          <span className="text-4xl text-center mb-5 font-semibold"> SignIn</span>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <form
