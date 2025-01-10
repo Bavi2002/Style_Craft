@@ -90,7 +90,7 @@ const Contact = () => {
             <div className="mt-6 flex justify-center space-x-4 text-3xl">
               <a
                 href="https://www.facebook.com"
-                className="text-blue-600 bg-gray-100 border text-center p-2 px-4 shadow-xl rounded-lg hover:text-blue-800 transition-colors"
+                className="text-blue-600 bg-gray-100 border text-center p-2 px-4 shadow-xl rounded-lg hover:text-blue-800 transition-colors   20021"
               >
                 <i className="fab fa-facebook-f"></i>
               </a>

@@ -33,18 +33,24 @@ const Contact = async (req, res) => {
       name,
       email,
       message,
-    });  
+    });
 
     await newContact.save();
-    await sendContact(email,name);
+    await sendContact(email, name);
 
     res
       .status(200)
-      .json({success:true, message: "Message Received! We'll Get Back To You Soon" });
+      .json({
+        success: true,
+        message: "Message Received! We'll Get Back To You Soon",
+      });
   } catch (error) {
     res
       .status(500)
-      .json({success:false, message: "An Error occured. Please try again Later" });
+      .json({
+        success: false,
+        message: "An Error occured. Please try again Later",
+      });
   }
 };
 

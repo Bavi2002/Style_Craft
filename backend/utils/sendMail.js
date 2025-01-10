@@ -76,7 +76,7 @@ const sendContact = async (email, name) => {
                     We have received your message and appreciate you taking the time to contact us.
                 </p>
                 <p style="font-size: 16px; color: #777; text-align: center; margin-bottom: 30px;">
-                    Our team will review your query and get back to you as soon as possible. In the meantime, feel free to browse through our website or reach out directly at ${process.env.CONTACT_EMAIL}.
+                    Our team will review your query and get back to you as soon as possible. In the meantime, feel free to browse through our website or reach out directly at ${process.env.GMAIL}.
                 </p>
                 <p style="font-size: 16px; color: #333; text-align: center; margin-bottom: 10px;">Best Regards,</p>
                 <p style="font-size: 16px; color: #333; text-align: center; font-weight: bold;">Style Craft Team</p>

@@ -29,20 +29,16 @@ const GoogleSignIn = ({ setUser }) => {
       );
 
       if (response.status === 200) {
-        const userData = {
-          email: response.data.user.email,
-          name: response.data.user.name,
-          profilePhoto: user.photoURL,
-          userId: response.data.user._id,
-        };
+        const { user, token } = response.data;
 
         // Save user data to localStorage
-        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
 
         //Testing
         console.log(response.data.message);
 
-        setUser(userData);
+        setUser(user);
         navigate("/home");
       }
     } catch (error) {

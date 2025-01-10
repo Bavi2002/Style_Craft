@@ -34,7 +34,8 @@ const Login = ({ setUser }) => {
       );
 
       if (response.status === 200) {
-        const { user } = response.data;
+        const { user, token } = response.data;
+        localStorage.setItem("jwtToken", token);
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         navigate("/home");

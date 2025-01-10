@@ -1,10 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, user }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
+
   if (!product) {
     return <div>Loading...</div>;
   }
+
+  const handleAddToCart = async () => {
+    if (!user) {
+      alert("Please log in to add items to your cart.");
+      navigate("/login");
+      return;
+    }
+    const token = localStorage.getItem("jwtToken");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/cart/addcart",
+        {
+          productId: product._id,
+          quantity: 1,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Product added to cart!");
+    } catch (error) {
+      console.error(
+        "Error adding product to cart:",
+        error.response?.data || error.message
+      );
+      if (error.response?.status === 401) {
+        console.log(error);
+        alert("You must log in to add items to the cart.");
+      }
+    }
+  };
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -120,7 +159,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <button
-          onClick={() => alert(`${product.name} added to cart!`)}
+          onClick={handleAddToCart}
           className="mt-6 w-full py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition duration-300"
         >
           Add to Cart

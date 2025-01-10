@@ -18,7 +18,9 @@ function App() {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    const storedToken = localStorage.getItem("jwtToken");
+
+    if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
@@ -32,7 +34,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/verify" element={<VerifyOtp />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/product" element={<Product user={user} />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />

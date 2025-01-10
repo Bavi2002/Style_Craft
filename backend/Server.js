@@ -8,6 +8,7 @@ const simpleRoutes = require("./routes/simpleRoutes");
 const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 const app = express();
 
@@ -27,7 +28,6 @@ app.use(
   })
 );
 
-
 // Configure express-session middleware
 app.use(
   session({
@@ -45,6 +45,7 @@ app.use(
 app.use("/api/users", userRoutes);
 app.use("/api", simpleRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 connectDB();
 

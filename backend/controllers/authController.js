@@ -1,6 +1,5 @@
 const User = require("../models/User");
-const bcryptjs = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 //Fire-Base Admin
 var admin = require("firebase-admin");
 
@@ -9,6 +8,8 @@ var serviceAccount = require("../firebase-admin/serviceAccount.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //Google-SignIn
 const googleSignIn = async (req, res) => {
@@ -31,6 +32,8 @@ const googleSignIn = async (req, res) => {
       await user.save();
     }
 
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
+
     //For API Testing
     res.status(200).json({
       message: "User signed in successfully with Google",
@@ -40,6 +43,7 @@ const googleSignIn = async (req, res) => {
         email: user.email,
         profilePhoto: user.profilePhoto,
       },
+      token,
     });
   } catch (error) {
     res

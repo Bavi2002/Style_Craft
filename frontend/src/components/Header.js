@@ -10,6 +10,7 @@ const Header = ({ user, setUser }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("jwtToken");
     setUser(null);
     window.location.reload();
   };
@@ -23,16 +24,16 @@ const Header = ({ user, setUser }) => {
       <nav className="hidden md:block">
         <ul className="flex space-x-10 mr-4 items-center text-xl font-medium tracking-widest">
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="/home">Home</a>
+          <Link to="/home">Home</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="/product">Product</a>
+          <Link to="/product">Product</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="#">About Us</a>
+          <Link to="/about">About Us</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="/contact">Contact</a>
+          <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>

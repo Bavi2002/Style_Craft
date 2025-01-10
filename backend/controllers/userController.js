@@ -2,7 +2,9 @@ const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 const { sendOtp } = require("../utils/sendMail");
 const uploadToAzure = require("../utils/azureBlob");
+const jwt = require("jsonwebtoken");
 
+const JWT_SECRET = process.env.JWT_SECRET;
 const register = async (req, res) => {
   try {
     const { name, email, address, phone, password } = req.body;
@@ -154,18 +156,21 @@ const login = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Password Not Match" });
 
-    req.session.user = {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      address: user.address,
-      phone: user.phone,
-      profilePhoto: user.profilePhoto,
-    };
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
 
-    res
-      .status(200)
-      .json({ message: "Login Successful", user: req.session.user });
+    res.status(200).json({
+      message: "Login Successful",
+      user: req.session.user,
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
+        profilePhoto: user.profilePhoto,
+      },
+    });
   } catch (error) {
     res.status(500).json({ message: "Failed to Login" });
   }
