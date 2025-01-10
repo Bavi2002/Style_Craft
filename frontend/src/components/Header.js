@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
-const Header = ({ user, setUser }) => {
+const Header = ({ user, setUser, cartItemsCount }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -24,22 +25,32 @@ const Header = ({ user, setUser }) => {
       <nav className="hidden md:block">
         <ul className="flex space-x-10 mr-4 items-center text-xl font-medium tracking-widest">
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-          <Link to="/home">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-          <Link to="/product">Product</Link>
+            <Link to="/product">Product</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-          <Link to="/about">About Us</Link>
+            <Link to="/about">About Us</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-          <Link to="/contact">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>
 
       {user ? (
         <div className="flex items-center space-x-4 mr-9">
+          <div className="relative">
+            <Link to="/cart">
+              <FaShoppingCart className="w-8 h-8 text-black" />
+              {cartItemsCount > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItemsCount}
+                </span>
+              )}
+            </Link>
+          </div>
           <img
             src={user.profilePhoto}
             alt="Profile"
@@ -75,16 +86,16 @@ const Header = ({ user, setUser }) => {
       >
         <ul className="flex flex-col space-y-4 items-center text-xl font-medium">
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="/home">Home</a>
+            <Link to="/home">Home</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="#">Product</a>
+            <Link to="/product">Product</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="#">About Us</a>
+            <Link to="/about">About Us</Link>
           </li>
           <li className="px-2 py-1 transform hover:scale-110 transition-transform duration-300">
-            <a href="#">Contact</a>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </nav>

@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const ProductCard = ({ product, user }) => {
+const ProductCard = ({ product, user, cartItems }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
   const handleAddToCart = async () => {
     if (!user) {
-      alert("Please log in to add items to your cart.");
+      toast.error("Please log in to add items to your cart.");
       navigate("/login");
       return;
     }
+
     const token = localStorage.getItem("jwtToken");
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/cart/addcart",
@@ -32,16 +31,15 @@ const ProductCard = ({ product, user }) => {
           },
         }
       );
-      alert("Product added to cart!");
-    } catch (error) {
-      console.error(
-        "Error adding product to cart:",
-        error.response?.data || error.message
-      );
-      if (error.response?.status === 401) {
-        console.log(error);
-        alert("You must log in to add items to the cart.");
+
+      if (response.data.message === "Item already added to cart") {
+        toast.info("Item already added to cart.");
+      } else {
+        toast.success("Product added to cart!");
       }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      toast.error("Error adding product to cart. Please try again.");
     }
   };
 

@@ -3,6 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const GoogleSignIn = ({ setUser }) => {
   const [error, setError] = useState(null);
@@ -11,7 +12,9 @@ const GoogleSignIn = ({ setUser }) => {
 
   const handleGoogleSignIn = async () => {
     if (!navigator.onLine) {
-      alert("No internet connection. Please check your network and try again.");
+      toast.error(
+        "No internet connection. Please check your network and try again."
+      );
       return;
     }
     try {
@@ -42,14 +45,7 @@ const GoogleSignIn = ({ setUser }) => {
         navigate("/home");
       }
     } catch (error) {
-      if (error.message === "Network Error") {
-        alert(
-          "Network Error. Please check your internet connection and try again."
-        );
-      } else {
-        alert("Google Sign-In failed. Please try again.");
-      }
-      console.error("Error during Google sign-in:", error.message);
+      alert("Error during Google sign-in:", error.message);
     } finally {
       setLoading(false);
     }

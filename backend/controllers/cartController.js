@@ -1,4 +1,5 @@
 const Cart = require("../models/Cart");
+const Product = require("../models/Product");
 
 const AddCart = async (req, res) => {
   if (!req.user || !req.user.id) {
@@ -12,8 +13,7 @@ const AddCart = async (req, res) => {
 
     let cartItem = await Cart.findOne({ userId, productId });
     if (cartItem) {
-      cartItem.quantity += quantity;
-      await cartItem.save();
+      return res.status(200).json({ message: "Item already added to cart" });
     } else {
       cartItem = new Cart({ userId, productId, quantity });
       await cartItem.save();
@@ -29,7 +29,13 @@ const AddCart = async (req, res) => {
 const UpdateCart = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
-    const userId = req.session.user.id;
+    const userId = req.user.id;
+
+    const product = await Product.findById(productId);
+
+    if (quantity > product.stock || quantity < 1) {
+      return res.status(400).json({ message: "Invalid quantity" });
+    }
 
     const cartItem = await Cart.findOneAndUpdate(
       { userId, productId },
@@ -50,7 +56,7 @@ const UpdateCart = async (req, res) => {
 const RemoveCart = async (req, res) => {
   try {
     const productId = req.params.productId;
-    const userId = req.session.user.id;
+    const userId = req.user.id;
 
     const deletedItem = await Cart.findOneAndDelete({ userId, productId });
     if (!deletedItem) {
@@ -65,7 +71,7 @@ const RemoveCart = async (req, res) => {
 
 const ViewCart = async (req, res) => {
   try {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     const cartItems = await Cart.find({ userId }).populate("productId");
     res.status(200).json(cartItems);
   } catch (error) {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import GoogleSignIn from "../components/GoogleSignIn";
+import { toast } from "react-toastify";
 
 const Register = ({ setUser }) => {
   const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const Register = ({ setUser }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value })); // Use functional update
+    setFormData((prev) => ({ ...prev, [name]: value }));
     validateField(name, value);
   };
 
@@ -108,7 +109,9 @@ const Register = ({ setUser }) => {
     } catch (error) {
       console.error("API Error:", error.response?.data || error.message);
       if (error.response && error.response.status === 400) {
-        alert("This Email Already Registered. Please Use a Different Email");
+        toast.error(
+          "This Email Already Registered. Please Use a Different Email"
+        );
       } else {
         setErrors(error.response?.data || { message: error.message });
       }

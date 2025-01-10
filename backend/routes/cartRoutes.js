@@ -11,8 +11,8 @@ const authenticate = require("../utils/Auth");
 const router = express.Router();
 
 router.post("/addcart", authenticate, AddCart);
-router.put("/updatecart", UpdateCart);
-router.delete("/deletecart/:productId", RemoveCart);
-router.get("/viewcart", ViewCart);
+router.put("/updatecart", authenticate, UpdateCart);
+router.delete("/deletecart/:productId", authenticate, RemoveCart);
+router.get("/viewcart", authenticate, ViewCart);
 
 module.exports = router;
