@@ -91,7 +91,7 @@ const Cart = ({ cartItems, setCartItems }) => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-10 mt-36 bg-gray-50  ">
+    <div className="max-w-7xl mx-auto p-10 mt-36 bg-gray-50">
     <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12">Your Cart</h1>
   
     {cartItems.length === 0 ? (
@@ -118,6 +118,19 @@ const Cart = ({ cartItems, setCartItems }) => {
                 <div className="flex flex-col">
                   <div className="text-lg font-semibold text-gray-800">{product.name}</div>
                   <div className="text-sm text-gray-500">Price: Rs.{product.price.toFixed(2)}</div>
+                  {/* Display Size and Color */}
+                  <div className="mt-2 text-sm text-gray-600">
+                    {item.size && (
+                      <div>
+                        <strong>Size:</strong> {item.size}
+                      </div>
+                    )}
+                    {item.color && (
+                      <div>
+                        <strong>Color:</strong> {item.color}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
   
@@ -177,6 +190,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       </div>
     )}
   </div>
+  
   
   
   );

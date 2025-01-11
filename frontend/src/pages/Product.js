@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
-const Product = ({ user, cartItems }) => {
+const Product = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -34,12 +34,7 @@ const Product = ({ user, cartItems }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pt-12 p-8">
           {products.length > 0 ? (
             products.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                user={user}
-                cartItems={cartItems}
-              />
+              <ProductCard key={product._id} product={product} />
             ))
           ) : (
             <div className="col-span-full flex justify-center items-center">

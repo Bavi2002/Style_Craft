@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
 
-const ProductCard = ({ product, user, cartItems }) => {
+const ProductCard = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const navigate = useNavigate();
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>

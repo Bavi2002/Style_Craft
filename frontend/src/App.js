@@ -44,10 +44,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/verify" element={<VerifyOtp />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route
-            path="/product"
-            element={<Product user={user} cartItems={cartItems} />}
-          />
+          <Route path="/product" element={<Product />} />
           <Route path="/contact" element={<Contact />} />
           <Route
             path="/cart"
@@ -59,7 +56,7 @@ function App() {
               />
             }
           />
-           <Route path="/products/:id" element={<ProductDetail user={user}/>} /> {/* Product details page */}
+          <Route path="/products/:id" element={<ProductDetail user={user} />} />
         </Routes>
         <Footer />
       </div>
