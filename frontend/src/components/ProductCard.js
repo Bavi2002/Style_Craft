@@ -121,13 +121,13 @@ const ProductCard = ({ product, user, cartItems }) => {
           </div>
         </div>
         <div className="mt-8 mb-2">
-    <Link
-      to={`/products/${product._id}`}
-      className="px-24 py-3  bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition duration-300"
-    >
-      Buy Now
-    </Link>
-  </div>
+          <Link
+            to={`/products/${product._id}`}
+            className="px-24 py-3  bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition duration-300"
+          >
+            Buy Now
+          </Link>
+        </div>
       </div>
     </div>
   );
