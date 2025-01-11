@@ -91,25 +91,32 @@ const Cart = ({ user, cartItems, setCartItems }) => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-28">
-    <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Your Cart</h1>
+    <div className="max-w-7xl mx-auto p-10 mt-36 bg-gray-50  ">
+    <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12">Your Cart</h1>
   
     {cartItems.length === 0 ? (
-      <div className="text-xl text-gray-600 text-center">
+      <div className="text-xl text-gray-600 text-center bg-white p-8 rounded-lg shadow-md">
         Your cart is empty. Add items to your cart to proceed.
       </div>
     ) : (
       <div className="space-y-6">
         {cartItems.map((item) => {
           const product = item.productId;
-          if (!product || !product.price|| !product._id) return null;
+          if (!product || !product.price || !product._id) return null;
   
           return (
-            <div key={item._id} className="flex items-center justify-between bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <div
+              key={item._id}
+              className="flex items-center justify-between bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            >
               <div className="flex items-center space-x-6">
-                <img alt={product.name} src={product.image[0]} className="w-24 h-24 object-cover rounded-md" />
+                <img
+                  alt={product.name}
+                  src={product.image[0]}
+                  className="w-24 h-24 object-cover rounded-md border border-gray-300"
+                />
                 <div className="flex flex-col">
-                  <div className="text-lg font-semibold text-gray-700">{product.name}</div>
+                  <div className="text-lg font-semibold text-gray-800">{product.name}</div>
                   <div className="text-sm text-gray-500">Price: Rs.{product.price.toFixed(2)}</div>
                 </div>
               </div>
@@ -119,28 +126,20 @@ const Cart = ({ user, cartItems, setCartItems }) => {
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() =>
-                      handleQuantityChange(
-                        product._id,
-                        item.quantity - 1,
-                        product.stock
-                      )
+                      handleQuantityChange(product._id, item.quantity - 1, product.stock)
                     }
                     disabled={item.quantity <= 1 || loading}
-                    className="bg-gray-200 text-gray-600 p-2 rounded-md hover:bg-gray-300 disabled:opacity-50"
+                    className="bg-gray-200 text-gray-600 p-2 rounded-full hover:bg-gray-300 disabled:opacity-50"
                   >
                     -
                   </button>
                   <span className="text-xl font-medium text-gray-700">{item.quantity}</span>
                   <button
                     onClick={() =>
-                      handleQuantityChange(
-                        product._id,
-                        item.quantity + 1,
-                        product.stock
-                      )
+                      handleQuantityChange(product._id, item.quantity + 1, product.stock)
                     }
                     disabled={item.quantity >= product.stock || loading}
-                    className="bg-gray-200 text-gray-600 p-2 rounded-md hover:bg-gray-300 disabled:opacity-50"
+                    className="bg-gray-200 text-gray-600 p-2 rounded-full hover:bg-gray-300 disabled:opacity-50"
                   >
                     +
                   </button>
@@ -152,7 +151,7 @@ const Cart = ({ user, cartItems, setCartItems }) => {
                   disabled={loading}
                   className="text-red-500 text-xl hover:text-red-700 disabled:opacity-50"
                 >
-                  &#10005; {/* Cross symbol */}
+                  &#10005;
                 </button>
               </div>
   
@@ -166,13 +165,19 @@ const Cart = ({ user, cartItems, setCartItems }) => {
     )}
   
     {cartItems.length > 0 && (
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md text-right">
-        <h3 className="text-2xl font-semibold text-gray-800">
+      <div className="mt-8 bg-white p-6 rounded-lg shadow-lg text-right space-y-4">
+        <h3 className="text-2xl font-bold text-gray-800">
           Total Price: Rs.{calculateTotalPrice().toFixed(2)}
         </h3>
+        <button
+          className="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-indigo-700 transition-colors duration-300"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     )}
   </div>
+  
   
   );
 };
