@@ -11,8 +11,8 @@ const addProduct = async (req, res) => {
       return res.status(400).json({ message: "All Fields Are Required" });
     }
 
-    if (!files || files.length < 2 || files.length > 6) {
-      return res.status(400).json({ message: "Upload between 2 to 6 Images" });
+    if (!files || files.length < 2 || files.length > 4) {
+      return res.status(400).json({ message: "Upload between 2 to 4 Images" });
     }
 
     const imageUrls = await Promise.all(

@@ -42,8 +42,8 @@ const AddProduct = () => {
     if (formData.images.length < 2) {
       newErrors.images = "At least 2 images are required";
     }
-    if (formData.images.length > 6) {
-      newErrors.images = "You can upload a maximum of 6 images";
+    if (formData.images.length > 4) {
+      newErrors.images = "You can upload a maximum of 4 images";
     }
     return newErrors;
   };
@@ -58,13 +58,13 @@ const AddProduct = () => {
     const files = Array.from(e.target.files);
     const filePreviews = files.map((file) => URL.createObjectURL(file));
 
-    if (formData.images.length + files.length <= 6) {
+    if (formData.images.length + files.length <= 4) {
       setFormData({ ...formData, images: [...formData.images, ...files] });
       setPreviews([...previews, ...filePreviews]);
       setFileCount(formData.images.length + files.length);
       setErrors((prev) => ({ ...prev, images: "" }));
     } else {
-      setErrors({ ...errors, images: "Maximum of 6 images allowed" });
+      setErrors({ ...errors, images: "Maximum of 4 images allowed" });
     }
   };
 

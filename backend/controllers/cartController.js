@@ -28,7 +28,7 @@ const AddCart = async (req, res) => {
 
 const UpdateCart = async (req, res) => {
   try {
-    const { productId, quantity } = req.body;
+    const { productId, quantity, size, color } = req.body;
     const userId = req.user.id;
 
     const product = await Product.findById(productId);
@@ -38,7 +38,7 @@ const UpdateCart = async (req, res) => {
     }
 
     const cartItem = await Cart.findOneAndUpdate(
-      { userId, productId },
+      { userId, productId, size, color },
       { quantity },
       { new: true }
     );
@@ -56,9 +56,15 @@ const UpdateCart = async (req, res) => {
 const RemoveCart = async (req, res) => {
   try {
     const productId = req.params.productId;
+    const { size, color } = req.body;
     const userId = req.user.id;
 
-    const deletedItem = await Cart.findOneAndDelete({ userId, productId });
+    const deletedItem = await Cart.findOneAndDelete({
+      userId,
+      productId,
+      size,
+      color,
+    });
     if (!deletedItem) {
       return res.status(404).json({ message: "Item Not Found In The Cart" });
     }
