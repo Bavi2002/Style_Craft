@@ -49,4 +49,27 @@ const getProducts = async (req, res) => {
     res.status(500).json({ message: "Failed to Display Products" });
   }
 };
-module.exports = { addProduct, getProducts };
+
+const getSingleProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Product Id Required" });
+    }
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Product Not Found" });
+    }
+
+    res.status(200).json({ success: true, product });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to Display the Product" });
+  }
+};
+
+module.exports = { addProduct, getProducts, getSingleProduct };

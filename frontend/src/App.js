@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import Product from "./pages/Product";
 import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
+import ProductDetail from "./pages/ProductDetails";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -58,6 +59,7 @@ function App() {
               />
             }
           />
+           <Route path="/products/:id" element={<ProductDetail user={user}/>} /> {/* Product details page */}
         </Routes>
         <Footer />
       </div>

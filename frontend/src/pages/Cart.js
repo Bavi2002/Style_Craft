@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Cart = ({ user, cartItems, setCartItems }) => {
+const Cart = ({ cartItems, setCartItems }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 

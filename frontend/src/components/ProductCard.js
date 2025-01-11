@@ -1,47 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const ProductCard = ({ product, user, cartItems }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
-
-  const handleAddToCart = async () => {
-    if (!user) {
-      toast.error("Please log in to add items to your cart.");
-      navigate("/login");
-      return;
-    }
-
-    const token = localStorage.getItem("jwtToken");
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/cart/addcart",
-        {
-          productId: product._id,
-          quantity: 1,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.data.message === "Item already added to cart") {
-        toast.info("Item already added to cart.");
-      } else {
-        toast.success("Product added to cart!");
-      }
-    } catch (error) {
-      console.error("Error adding product to cart:", error);
-      toast.error("Error adding product to cart. Please try again.");
-    }
-  };
 
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
@@ -105,7 +70,7 @@ const ProductCard = ({ product, user, cartItems }) => {
         </button>
       </div>
 
-      <div className="mt-4 text-center">
+      <div className="mt-4 text-center w-full">
         <p className="font-bold text-lg sm:text-xl text-gray-900 truncate">
           {product.name}
         </p>
@@ -155,13 +120,14 @@ const ProductCard = ({ product, user, cartItems }) => {
             </div>
           </div>
         </div>
-
-        <button
-          onClick={handleAddToCart}
-          className="mt-6 w-full py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition duration-300"
-        >
-          Add to Cart
-        </button>
+        <div className="mt-8 mb-2">
+    <Link
+      to={`/products/${product._id}`}
+      className="px-24 py-3  bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 active:scale-95 transition duration-300"
+    >
+      Buy Now
+    </Link>
+  </div>
       </div>
     </div>
   );
