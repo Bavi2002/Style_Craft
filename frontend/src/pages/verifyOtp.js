@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Shield, Check, RefreshCw } from "lucide-react";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState("");
@@ -79,53 +80,75 @@ const VerifyOtp = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-cover bg-center"
+      className="relative min-h-screen bg-cover bg-center font-lora"
       style={{ backgroundImage: "url('/assets/images/bg9.jpg')" }}
     >
       <div className="flex items-center justify-center min-h-screen bg-opacity-50 pt-12 px-8">
-        <div className="bg-white bg-opacity-25 border-gray-300 border backdrop-blur-lg p-8 rounded-3xl shadow-xl w-full max-w-md sm:w-96">
-          <h1 className="text-center text-4xl font-bold text-blue-800 mb-6">
-            Verify OTP
+        <div className="text-center bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden w-full max-w-md sm:w-96 transition-transform transform hover:scale-[1.02]">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4 mx-auto mt-8">
+            <Shield className="w-8 h-8 text-blue-600" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Verify Your Email
           </h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-lg font-semibold tracking-wide text-gray-700 mb-2">
-                Enter OTP
-              </label>
-              <input
-                type="text"
-                value={otp}
-                onChange={handleOtpChange}
-                placeholder="Enter your OTP"
-                className="w-full px-4 py-2 rounded-lg border bg-white bg-opacity-40 placeholder:text-gray-600 placeholder:text-base placeholder:tracking-wide shadow-lg backdrop-blur-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              {errors && <p className="text-red-500 text-sm mt-1">{errors}</p>}
+          <p className="text-sm text-gray-600 mt-5  px-4 mb-5">
+            Enter the 6-digit Code Sent to Your Email to Verify Your Account.
+          </p>
+          <div className="px-8">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="space-y-4">
+                <div className="flex justify-between gap-2">
+                  <input
+                    value={otp}
+                    type="text"
+                    onChange={handleOtpChange}
+                    className="w-full h-12 pl-4 text-xl font-bold rounded-xl border border-gray-200 bg-white/50 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+                  />
+                </div>
+                {errors && (
+                  <div className="text-red-500 text-sm bg-red-50 p-3 rounded-lg border border-red-100 text-center">
+                    {errors}
+                  </div>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group"
+              >
+                Verify Code
+                <Check className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              </button>
+            </form>
+          </div>
+          <div className="relative flex items-center justify-center my-6">
+            <div className="absolute inset-x-0 h-px bg-gray-300"></div>
+            <div className="relative bg-white px-4 text-sm text-gray-500">
+              Didn't receive the code?
             </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-700 text-white py-3 rounded-lg font-bold transform hover:scale-105 transition duration-300"
-            >
-              Verify
-            </button>
-          </form>
-          <div className="mt-6 text-center">
+          </div>
+          <div className="flex items-center justify-center mt-6">
             <button
               onClick={handleResendOtp}
               disabled={isResending}
-              className={`w-full py-3 rounded-lg font-bold text-white ${
+              className={`px-3 py-3 w-full mx-7 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                 isResending
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-green-600 transform hover:scale-105 transition duration-300"
+                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                  : "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
               }`}
             >
-              {isResending ? "Resend" : "Resend OTP"}
+              <RefreshCw
+                className={`w-5 h-5 ${isResending ? "animate-spin" : ""}`}
+              />
+              {isResending ? `Resend in ${resendTimer}s` : "Resend Code"}
             </button>
-            {isResending && (
-              <span className="block mt-2 text-sm text-gray-600">
-                Resend in {resendTimer} seconds
-              </span>
-            )}
           </div>
+
+          <footer className="text-xs text-gray-400 mt-8 mb-4">
+            Need help?{" "}
+            <a href="#" className="text-blue-500 hover:underline">
+              Contact Support
+            </a>
+          </footer>
         </div>
       </div>
     </div>
