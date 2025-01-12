@@ -84,7 +84,7 @@ const VerifyOtp = () => {
       style={{ backgroundImage: "url('/assets/images/bg9.jpg')" }}
     >
       <div className="flex items-center justify-center min-h-screen bg-opacity-50 pt-12 px-8">
-        <div className="text-center bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden w-full max-w-md sm:w-96 transition-transform transform hover:scale-[1.02]">
+        <div className="text-center bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden w-full max-w-md sm:w-96 transition-transform transform ">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4 mx-auto mt-8">
             <Shield className="w-8 h-8 text-blue-600" />
           </div>
