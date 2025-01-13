@@ -9,6 +9,7 @@ const session = require("express-session");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const orderRoutes = require("./routes/orderRoutes")
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use("/api/users", userRoutes);
 app.use("/api", simpleRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 
 connectDB();
 
