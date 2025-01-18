@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetails";
 import AboutUs from "./pages/AboutUs";
+import Checkout from "./pages/Order";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,6 +53,16 @@ function App() {
             path="/cart"
             element={
               <Cart
+                user={user}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
+            }
+          />
+                <Route
+            path="/order"
+            element={
+              <Checkout
                 user={user}
                 cartItems={cartItems}
                 setCartItems={setCartItems}

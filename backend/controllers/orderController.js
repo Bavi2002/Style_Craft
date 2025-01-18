@@ -1,10 +1,14 @@
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const User = require("../models/User");
+const Product = require("../models/Product");
 
 const getOrderDetails = async (req, res) => {
   try {
     const userId = req.user.id;
     const orders = await Order.find({ userId });
+
+    const user = await User.findById(userId);
 
     const uniqueAddresses = [
       ...new Set(orders.map((order) => order.deliveryAddress)),
@@ -13,18 +17,22 @@ const getOrderDetails = async (req, res) => {
     const uniqueCardAddress = [
       ...new Map(
         orders
-          .filter((order) => order.cardDetails && order.cardDetails.last4Digits)
+          .filter((order) => order.cardDetails && order.cardDetails.number)
           .map((order) => [
-            `${order.cardDetails.cardType}-${order.cardDetails.last4Digits}`,
+            `${order.cardDetails.cardType}-${order.cardDetails.number}-${order.cardDetails.expDate}`,
             order.cardDetails,
           ])
       ).values(),
     ];
 
+    const phoneNumbers = orders.map((order) => order.phoneNumber);
+
     res.status(200).json({
       orders,
       deliveryAddress: uniqueAddresses,
       cardDetails: uniqueCardAddress,
+      phoneNumbers,
+      email: user.email,
     });
   } catch (error) {
     res.status(500).json({ message: "Failed to Fetch Order Details " });
@@ -34,7 +42,10 @@ const getOrderDetails = async (req, res) => {
 const placeOrder = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { deliveryAddress, paymentMethod, cardDetails } = req.body;
+    const { deliveryAddress, paymentMethod, cardDetails, phoneNumber } =
+      req.body;
+
+    const user = await User.findById(userId);
 
     const cartItems = await Cart.find({ userId }).populate("productId");
     if (cartItems.length === 0) {
@@ -59,9 +70,13 @@ const placeOrder = async (req, res) => {
       paymentMethod === "Card" && cardDetails?.cardType
         ? cardDetails.cardType
         : undefined;
-    const last4Digits =
+    const number =
       paymentMethod === "Card" && cardDetails?.number
         ? cardDetails.number.slice(-4)
+        : undefined;
+    const expDate =
+      paymentMethod === "Card" && cardDetails?.expDate
+        ? cardDetails.expDate
         : undefined;
 
     const newOrder = new Order({
@@ -73,13 +88,22 @@ const placeOrder = async (req, res) => {
         color: item.color,
       })),
       deliveryAddress,
+      phoneNumber,
+      email: user.email,
       paymentMethod,
       cardDetails:
-        paymentMethod === "Card" ? { cardType, last4Digits } : undefined,
+        paymentMethod === "Card"
+          ? { cardType, number, expDate }
+          : undefined,
       totalAmount: totalWithVAT,
     });
 
     await newOrder.save();
+    for (const item of cartItems) {
+      const product = item.productId;
+      const newStock = product.stock - item.quantity;
+      await Product.findByIdAndUpdate(product._id, { stock: newStock });
+    }
 
     await Cart.deleteMany({ userId });
 
@@ -87,6 +111,7 @@ const placeOrder = async (req, res) => {
       .status(201)
       .json({ message: "Order Placed Successfully", order: newOrder });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Failed to Place Order" });
   }
 };

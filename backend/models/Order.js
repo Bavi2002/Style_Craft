@@ -29,6 +29,14 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
   paymentMethod: {
     type: String,
     enum: ["COD", "Card"],
@@ -38,7 +46,10 @@ const orderSchema = new mongoose.Schema({
     cardType: {
       type: String,
     },
-    last4Digits: {
+    number: {
+      type: String,
+    },
+    expDate: {
       type: String,
     },
   },

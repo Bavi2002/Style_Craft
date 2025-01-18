@@ -36,6 +36,10 @@ const Cart = ({ cartItems, setCartItems }) => {
     navigate(`/products/${productId}`);
   };
 
+  const handleclick2 = () => {
+    navigate("/order");
+  };
+
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => {
       const product = item.productId;
@@ -361,7 +365,10 @@ const Cart = ({ cartItems, setCartItems }) => {
                 </div>
               </div>
 
-              <button className="w-full mt-8 bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-5 rounded-2xl text-lg font-semibold hover:from-indigo-700 hover:to-violet-700 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus:ring-4 focus:ring-indigo-200 focus:outline-none">
+              <button
+                onClick={handleclick2}
+                className="w-full mt-8 bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-5 rounded-2xl text-lg font-semibold hover:from-indigo-700 hover:to-violet-700 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus:ring-4 focus:ring-indigo-200 focus:outline-none"
+              >
                 Proceed to Checkout
               </button>
 

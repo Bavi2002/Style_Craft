@@ -11,7 +11,7 @@ const AddCart = async (req, res) => {
 
     const userId = req.user.id;
 
-    let cartItem = await Cart.findOne({ userId, productId, size, color });
+    let cartItem = await Cart.findOne({ userId, productId });
     if (cartItem) {
       return res.status(200).json({ message: "Item already added to cart" });
     } else {
