@@ -215,15 +215,69 @@ const deleteUserAccount = async (req, res) => {
         await deleteProfilePhotoFromAzure(
           profileImageBlobName,
           "profile-photos"
-        ); 
+        );
       }
     }
 
     await User.findByIdAndDelete(userId);
     res.status(200).json({ message: "User account deleted successfully" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { phone, address } = req.body;
+
+    if (!phone && !address) {
+      return res
+        .status(400)
+        .json({ message: "Phone or address are required." });
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    let profilePhotoUrl = user.profilePhoto;
+    if (req.file) {
+      const fileBuffer = req.file.buffer;
+      const fileName = req.file.originalname;
+
+      if (
+        user.profilePhoto &&
+        !user.profilePhoto.includes("googleusercontent.com")
+      ) {
+        const profileImageBlobName = user.profilePhoto.split("/").pop();
+        await deleteProfilePhotoFromAzure(
+          profileImageBlobName,
+          "profile-photos"
+        );
+      }
+      profilePhotoUrl = await uploadToAzure(
+        fileBuffer,
+        fileName,
+        "profile-photos"
+      );
+    }
+    user.phone = phone;
+    user.address = address;
+    user.profilePhoto = profilePhotoUrl;
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Profile updated successfully.",
+      user: {
+        phone: user.phone,
+        address: user.address,
+        profilePhoto: user.profilePhoto,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Something Went Wrong" });
   }
 };
 
@@ -234,4 +288,5 @@ module.exports = {
   resendOtp,
   profile,
   deleteUserAccount,
+  updateProfile,
 };

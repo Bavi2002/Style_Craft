@@ -70,7 +70,7 @@ function App() {
             }
           />
           <Route path="/products/:id" element={<ProductDetail user={user} />} />
-          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/profile" element={<UserProfile setUser={setUser} />} />
         </Routes>
         <Footer />
       </div>
