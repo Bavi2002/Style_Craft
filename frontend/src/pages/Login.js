@@ -22,7 +22,7 @@ const Login = ({ setUser }) => {
 
   const saveToken = (token) => {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
-    const expiration = decodedToken.exp * 1000; // Convert to milliseconds
+    const expiration = decodedToken.exp * 1000; 
     localStorage.setItem("jwtToken", token);
     localStorage.setItem("tokenExpiration", expiration.toString());
   };

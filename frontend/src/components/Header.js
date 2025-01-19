@@ -25,16 +25,16 @@ const Header = ({ user, setUser, cartItemsCount }) => {
     if (tokenExpiration) {
       const now = Date.now();
       if (now > Number(tokenExpiration)) {
-        handleLogout(); // Logout if token is expired
+        handleLogout(); 
       } else {
-        // Set a timeout for the remaining time
+  
         setTimeout(handleLogout, Number(tokenExpiration) - now);
       }
     }
   };
 
   useEffect(() => {
-    checkAutoLogout(); // Run the auto-logout check on component mount
+    checkAutoLogout(); 
   }, []);
   return (
     <header className="flex items-center justify-between font-lora p-3 fixed top-0 w-full bg-opacity-80 backdrop-blur-lg shadow-2xl z-50 text-black">
@@ -71,11 +71,13 @@ const Header = ({ user, setUser, cartItemsCount }) => {
               )}
             </Link>
           </div>
+          <Link to={"/profile"}>
           <img
             src={user.profilePhoto}
             alt="Profile"
             className="w-16 h-16 rounded-full border-gray-300 border-2"
           />
+          </Link>
           <button
             onClick={handleLogout}
             className="ml-4 bg-red-500 px-5 py-2 font-medium text-white rounded-3xl text-center tracking-wider text-base transform hover:scale-105 transition-transform duration-300"

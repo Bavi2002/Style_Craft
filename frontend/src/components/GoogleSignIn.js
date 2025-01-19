@@ -10,6 +10,13 @@ const GoogleSignIn = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const saveToken = (token) => {
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    const expiration = decodedToken.exp * 1000; 
+    localStorage.setItem("jwtToken", token);
+    localStorage.setItem("tokenExpiration", expiration.toString());
+  };
+
   const handleGoogleSignIn = async () => {
     if (!navigator.onLine) {
       toast.error(
@@ -35,7 +42,7 @@ const GoogleSignIn = ({ setUser }) => {
         const { user, token } = response.data;
 
         // Save user data to localStorage
-        localStorage.setItem("jwtToken", token);
+        saveToken(token);
         localStorage.setItem("user", JSON.stringify(user));
 
         //Testing

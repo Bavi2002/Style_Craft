@@ -19,6 +19,7 @@ import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetails";
 import AboutUs from "./pages/AboutUs";
 import Checkout from "./pages/Order";
+import UserProfile from "./pages/Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,7 +32,6 @@ function App() {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-
   return (
     <Router>
       <div>
@@ -70,6 +70,7 @@ function App() {
             }
           />
           <Route path="/products/:id" element={<ProductDetail user={user} />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
         <Footer />
       </div>

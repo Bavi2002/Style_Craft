@@ -1,7 +1,10 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 const { sendOtp } = require("../utils/sendMail");
-const uploadToAzure = require("../utils/azureBlob");
+const {
+  uploadToAzure,
+  deleteProfilePhotoFromAzure,
+} = require("../utils/azureBlob");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -164,10 +167,6 @@ const login = async (req, res) => {
       token,
       user: {
         id: user._id,
-        name: user.name,
-        email: user.email,
-        address: user.address,
-        phone: user.phone,
         profilePhoto: user.profilePhoto,
       },
     });
@@ -192,10 +191,47 @@ const profile = async (req, res) => {
       phone: user.phone,
       profilePhoto: user.profilePhoto,
     });
-
   } catch (error) {
     res.status(500).json({ message: "Error in Displaying Profile" });
   }
 };
 
-module.exports = { register, verify, login, resendOtp, profile };
+const deleteUserAccount = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.profilePhoto) {
+      if (
+        user.profilePhoto.startsWith("https://") &&
+        user.profilePhoto.includes("googleusercontent.com")
+      ) {
+        console.log("Google profile photo, skipping Azure delete.");
+      } else {
+        const profileImageBlobName = user.profilePhoto.split("/").pop();
+        await deleteProfilePhotoFromAzure(
+          profileImageBlobName,
+          "profile-photos"
+        ); 
+      }
+    }
+
+    await User.findByIdAndDelete(userId);
+    res.status(200).json({ message: "User account deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+module.exports = {
+  register,
+  verify,
+  login,
+  resendOtp,
+  profile,
+  deleteUserAccount,
+};

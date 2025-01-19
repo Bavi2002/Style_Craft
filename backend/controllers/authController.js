@@ -39,8 +39,6 @@ const googleSignIn = async (req, res) => {
       message: "User signed in successfully with Google",
       user: {
         _id: user._id,
-        name: user.name,
-        email: user.email,
         profilePhoto: user.profilePhoto,
       },
       token,
