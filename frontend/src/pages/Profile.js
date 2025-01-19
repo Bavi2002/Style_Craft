@@ -149,10 +149,10 @@ const UserProfile = ({ setUser }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 pt-28 ">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white pt-28 ">
       {userDetails ? (
-        <div className="flex flex-col lg:flex-row gap-8 justify-center ">
-          <div className="p-4 md:p-8  lg:top-36 overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-8 justify-center  mb-11">
+          <div className="p-4 md:p-8  lg:top-36 overflow-hidden ">
             <div className="max-w-4xl mx-auto space-y-8">
               {/* Profile Header */}
               <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-6">
@@ -356,7 +356,7 @@ const UserProfile = ({ setUser }) => {
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-br from-slate-50 to-white rounded-xl shadow-lg p-6 space-y-6 mt-8 mb-12 ">
+          <div className="rounded-xl shadow-lg p-6 space-y-6 mt-8 mb-auto ">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <h2 className="text-2xl font-semibold text-slate-800">
                 Your Orders
@@ -379,7 +379,7 @@ const UserProfile = ({ setUser }) => {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6 md:grid-cols-3">
                 {orders.map((order) => (
                   <div
                     key={order._id}
