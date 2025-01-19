@@ -156,7 +156,7 @@ const login = async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: "Password Not Match" });
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "5h" });
 
     res.status(200).json({
       message: "Login Successful",
@@ -176,4 +176,26 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, verify, login, resendOtp };
+const profile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not Found" });
+    }
+
+    res.status(200).json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      address: user.address,
+      phone: user.phone,
+      profilePhoto: user.profilePhoto,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error in Displaying Profile" });
+  }
+};
+
+module.exports = { register, verify, login, resendOtp, profile };

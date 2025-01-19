@@ -1,21 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ user, setUser, cartItemsCount }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("tokenExpiration");
     setUser(null);
+    navigate("/home");
     window.location.reload();
   };
 
+  const checkAutoLogout = () => {
+    const tokenExpiration = localStorage.getItem("tokenExpiration");
+    if (tokenExpiration) {
+      const now = Date.now();
+      if (now > Number(tokenExpiration)) {
+        handleLogout(); // Logout if token is expired
+      } else {
+        // Set a timeout for the remaining time
+        setTimeout(handleLogout, Number(tokenExpiration) - now);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkAutoLogout(); // Run the auto-logout check on component mount
+  }, []);
   return (
     <header className="flex items-center justify-between font-lora p-3 fixed top-0 w-full bg-opacity-80 backdrop-blur-lg shadow-2xl z-50 text-black">
       <div className="text-5xl ml-3 p-4 font-bold tracking-wider">

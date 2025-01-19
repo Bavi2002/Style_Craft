@@ -20,6 +20,13 @@ const Login = ({ setUser }) => {
     setPassword(e.target.value);
   };
 
+  const saveToken = (token) => {
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    const expiration = decodedToken.exp * 1000; // Convert to milliseconds
+    localStorage.setItem("jwtToken", token);
+    localStorage.setItem("tokenExpiration", expiration.toString());
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setErrors("");
@@ -36,7 +43,7 @@ const Login = ({ setUser }) => {
 
       if (response.status === 200) {
         const { user, token } = response.data;
-        localStorage.setItem("jwtToken", token);
+        saveToken(token);
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         navigate("/home");
