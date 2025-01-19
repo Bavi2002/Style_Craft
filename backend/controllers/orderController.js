@@ -10,6 +10,35 @@ const getOrderDetails = async (req, res) => {
 
     const user = await User.findById(userId);
 
+    const orderDetailsWithProducts = await Promise.all(
+      orders.map(async (order) => {
+        const cartItemsWithDetails = await Promise.all(
+          order.cartItems.map(async (cartItem) => {
+            const product = await Product.findById(cartItem.productId);
+
+            const productImage = Array.isArray(product.image)
+              ? product.image[0]
+              : product.image;
+
+            return {
+              ...cartItem,
+              productId:product._id,
+              productName: product.name,
+              productImage: productImage,
+              productSize: cartItem.size,
+              productColor: cartItem.color,
+              productQty: cartItem.quantity,
+            };
+          })
+        );
+
+        return {
+          ...order.toObject(),
+          cartItems: cartItemsWithDetails,
+        };
+      })
+    );
+
     const uniqueAddresses = [
       ...new Set(orders.map((order) => order.deliveryAddress)),
     ];
@@ -28,7 +57,7 @@ const getOrderDetails = async (req, res) => {
     const phoneNumbers = orders.map((order) => order.phoneNumber);
 
     res.status(200).json({
-      orders,
+      orders: orderDetailsWithProducts,
       deliveryAddress: uniqueAddresses,
       cardDetails: uniqueCardAddress,
       phoneNumbers,
@@ -92,9 +121,7 @@ const placeOrder = async (req, res) => {
       email: user.email,
       paymentMethod,
       cardDetails:
-        paymentMethod === "Card"
-          ? { cardType, number, expDate }
-          : undefined,
+        paymentMethod === "Card" ? { cardType, number, expDate } : undefined,
       totalAmount: totalWithVAT,
     });
 
@@ -111,7 +138,7 @@ const placeOrder = async (req, res) => {
       .status(201)
       .json({ message: "Order Placed Successfully", order: newOrder });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ message: "Failed to Place Order" });
   }
 };

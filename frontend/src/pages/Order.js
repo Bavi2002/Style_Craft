@@ -137,7 +137,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
       navigate("/home");
     } catch (error) {
       console.error("Error placing order", error);
-      alert("Failed to place order");
+      toast.error("Failed to place order");
     }
   };
 
@@ -178,7 +178,6 @@ const Checkout = ({ cartItems, setCartItems }) => {
       return;
     }
 
-    // Validation for Last 4 Digits
     if (
       !newCard.number ||
       newCard.number.length !== 4 ||
@@ -188,23 +187,21 @@ const Checkout = ({ cartItems, setCartItems }) => {
       return;
     }
 
-    // Validation for Expiration Date (MM/YY)
-    const expDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/; // Match format MM/YY
+    const expDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if (!newCard.expDate || !expDateRegex.test(newCard.expDate)) {
       toast.error("Please enter a valid expiration date in MM/YY format.");
       return;
     }
     if (newCard.cardType && newCard.number && newCard.expDate) {
-      // Add new card logic, for example, send it to backend
       console.log("Card added:", newCard);
-      setPreviousCards((prev) => [...prev, newCard]); // Add new card to previousCards
+      setPreviousCards((prev) => [...prev, newCard]);
       setNewCard({
         cardType: "",
         number: "",
         expDate: "",
       });
     } else {
-      alert("Please fill in all card details.");
+      toast.error("Please fill in all card details.");
     }
   };
   return (
