@@ -142,7 +142,7 @@ const UserProfile = ({ setUser }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setOrders(response.data.orders);
+      setOrders(response.data.orders.slice(0, 6));
     } catch (error) {
       toast.error("Failed to Fetch Previous Order");
     }

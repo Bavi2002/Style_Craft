@@ -243,13 +243,17 @@ const updateProfile = async (req, res) => {
 
     let profilePhotoUrl = user.profilePhoto;
     if (req.file) {
-      const fileBuffer = req.file.buffer;
-      const fileName = req.file.originalname;
-
       if (
         user.profilePhoto &&
-        !user.profilePhoto.includes("googleusercontent.com")
+        user.profilePhoto.includes("googleusercontent.com")
       ) {
+        return res.status(403).json({
+          message: "Profile photo cannot be changed for Google accounts.",
+        });
+      }
+      const fileBuffer = req.file.buffer;
+      const fileName = req.file.originalname;
+      if (user.profilePhoto) {
         const profileImageBlobName = user.profilePhoto.split("/").pop();
         await deleteProfilePhotoFromAzure(
           profileImageBlobName,

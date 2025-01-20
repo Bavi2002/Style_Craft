@@ -2,6 +2,7 @@ const Cart = require("../models/Cart");
 const Order = require("../models/Order");
 const User = require("../models/User");
 const Product = require("../models/Product");
+const { sendOrderConfirmation } = require("../utils/sendMail");
 
 const getOrderDetails = async (req, res) => {
   try {
@@ -133,6 +134,7 @@ const placeOrder = async (req, res) => {
     }
 
     await Cart.deleteMany({ userId });
+    await sendOrderConfirmation(user, cartItems, deliveryAddress, paymentMethod, totalWithVAT);
 
     res
       .status(201)
