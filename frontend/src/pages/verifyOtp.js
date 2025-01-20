@@ -145,7 +145,7 @@ const VerifyOtp = () => {
 
           <footer className="text-xs text-gray-400 mt-8 mb-4">
             Need help?{" "}
-            <a href="#" className="text-blue-500 hover:underline">
+            <a href="/contact" className="text-blue-500 hover:underline">
               Contact Support
             </a>
           </footer>

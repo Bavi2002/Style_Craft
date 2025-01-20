@@ -19,7 +19,6 @@ const Register = ({ setUser }) => {
 
   const [preview, setPreiview] = useState(null);
   const [errors, setErrors] = useState({});
-  const [generalError, setGeneralError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -107,8 +106,6 @@ const Register = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setGeneralError("");
 
     if (!validateForm()) {
       toast.error("Please fill out all required fields");
