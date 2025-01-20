@@ -75,12 +75,15 @@ const Home = () => {
           </p>
 
           <div className="space-x-0 sm:space-x-4 flex flex-col sm:flex-row items-center">
-            <button className="bg-white text-blue-900 text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
-              Get Started
-            </button>
-            <button className="bg-transparent border-2 border-white text-lg px-6 py-3 rounded-full text-white shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto mt-3 sm:mt-0">
+            <Link to="/product">
+              <button className="bg-white text-blue-900 text-lg px-6 py-3 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
+                Get Started
+              </button>
+            </Link>
+            <Link to="/about"> <button className="bg-transparent border-2 border-white text-lg px-6 py-3 rounded-full text-white shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto mt-3 sm:mt-0">
               Learn More
             </button>
+            </Link>
           </div>
         </div>
 
@@ -151,9 +154,11 @@ const Home = () => {
           <h1 className="font-bold text-xl sm:text-4xl text-center text-white w-full sm:w-auto ">
             Top Sales🔥
           </h1>
+          <Link to="/product">
           <button className="mt-4 sm:mt-0 bg-black text-white px-4 py-2 rounded-3xl ">
             Shop More
           </button>
+          </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {products.length > 0 ? (

@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 require("@fortawesome/fontawesome-free/css/all.min.css");
+
 
 const Footer = () => {
   return (
@@ -31,16 +33,16 @@ const Footer = () => {
           <h2 className="text-xl font-bold text-highlight">Quick Links</h2>
           <ul className="text-lg text-gray-400 space-y-2">
             <li className="transform hover:scale-110 transition-transform duration-300">
-              <a href="#">Home</a>
+            <Link to="/home">Home</Link>
             </li>
             <li className="transform hover:scale-110 transition-transform duration-300">
-              <a href="#">Contact</a>
+            <Link to="/contact">Contact</Link>
             </li>
             <li className="transform hover:scale-110 transition-transform duration-300">
-              <a href="#">Privacy Policy</a>
+            <Link to="/product">Product</Link>
             </li>
             <li className="transform hover:scale-110 transition-transform duration-300">
-              <a href="#">About</a>
+            <Link to="/about">About Us</Link>
             </li>
           </ul>
         </div>
